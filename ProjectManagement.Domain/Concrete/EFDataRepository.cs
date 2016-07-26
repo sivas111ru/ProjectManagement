@@ -8,7 +8,7 @@ using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Domain.Concrete
 {
-    public class EFUserRepository: IUserRepository
+    public class EFDataRepository: IDataRepository
     {
         private EFDbContext context = new EFDbContext();
         public IQueryable<User> Users => context.Users;

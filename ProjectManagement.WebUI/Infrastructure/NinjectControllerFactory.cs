@@ -7,6 +7,8 @@ using System.Web.Routing;
 using Ninject;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Concrete;
+using ProjectManagement.WebUI.Infrastructure.Abstract;
+using ProjectManagement.WebUI.Infrastructure.Concrete;
 
 namespace ProjectManagement.WebUI.Infrastructure
 {
@@ -30,7 +32,8 @@ namespace ProjectManagement.WebUI.Infrastructure
         private void AddBindings()
         {
             // configure container
-            ninjectKernel.Bind<IUserRepository>().To<EFUserRepository>();
+            ninjectKernel.Bind<IDataRepository>().To<EFDataRepository>();
+            ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
     }
 }

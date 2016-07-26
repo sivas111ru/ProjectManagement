@@ -1,0 +1,13 @@
+﻿@model ProjectManagement.WebUI.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    @Html.ActionLink("Forgot password?", "Recover")
+    <p><input type="submit" value="Log in" /></p>
+}

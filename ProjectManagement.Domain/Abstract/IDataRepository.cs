@@ -7,7 +7,7 @@ using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Domain.Abstract
 {
-    public interface IUserRepository
+    public interface IDataRepository
     {
         IQueryable<User> Users { get; }
     }

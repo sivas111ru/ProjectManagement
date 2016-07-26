@@ -8,11 +8,12 @@ using ProjectManagement.Domain.Abstract;
 namespace ProjectManagement.WebUI.Controllers
 {
     // connection test
+    [Authorize]
     public class TestController : Controller
     {
-        private IUserRepository repository;
+        private IDataRepository repository;
 
-        public TestController(IUserRepository userRepository)
+        public TestController(IDataRepository userRepository)
         {
             repository = userRepository;
         }

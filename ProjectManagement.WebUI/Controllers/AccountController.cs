@@ -11,10 +11,12 @@ namespace ProjectManagement.WebUI.Controllers
     public class AccountController : Controller
     {
         private IAuthProvider authProvider;
+        private IResetPass resetPass;
 
-        public AccountController(IAuthProvider auth)
+        public AccountController(IAuthProvider auth, IResetPass passR)
         {
             authProvider = auth;
+            resetPass = passR;
         }
         public ViewResult Login()
         {
@@ -39,5 +41,22 @@ namespace ProjectManagement.WebUI.Controllers
 
             return View();
         }
+
+        public ViewResult ResetPass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPass(ResetPassViewModel model)
+        {
+            if (resetPass.Reset(model.Email))
+            {
+                TempData["message"] = string.Format("Success. Check you email");
+                return Redirect(Url.Action("Login", "Account"));
+            }
+            return View();
+        }
+
     }
 }

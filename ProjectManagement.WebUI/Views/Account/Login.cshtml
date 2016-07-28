@@ -14,11 +14,15 @@
 
             <fieldset class="form-group">
                 @Html.LabelFor(m => m.Email)
+                <br />
+                @Html.ValidationMessageFor(m => m.Email)
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
             </fieldset>
 
             <fieldset class="form-group">
                 @Html.LabelFor(m => m.Password)
+                <br />
+                @Html.ValidationMessageFor(m => m.Password)
                 @Html.EditorFor(m => m.Password, new {htmlAttributes = new {@class = "form-control"}})
             </fieldset>
 

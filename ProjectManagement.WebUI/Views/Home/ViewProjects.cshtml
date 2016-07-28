@@ -12,27 +12,36 @@
 </p>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.id)</th>
-        <th>@Html.DisplayNameFor(model => model.name)</th>
-        <th>@Html.DisplayNameFor(model => model.createDate)</th>
-        <th>@Html.DisplayNameFor(model => model.Initiator)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Initiator)
+        </th>
+        <th></th>
     </tr>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.ActionLink(item.name, "Edit", "Project")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Initiator)
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.ActionLink(item.name, "Edit", "Project", new { id = item.id }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Initiator)
+        </td>
+    </tr>
+}
 
 </table>

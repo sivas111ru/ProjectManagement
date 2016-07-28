@@ -29,9 +29,14 @@
     </div>
 
     <div class="container body-content">
+        @if (TempData["message"] != null)
+        {
+            <div class="Message">@TempData["message"]</div>
+        }
+
         @RenderBody()
 
-        <hr />
+        <hr/>
 
         <footer class="footer navbar-fixed-bottom">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

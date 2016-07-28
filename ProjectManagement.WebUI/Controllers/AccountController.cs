@@ -31,7 +31,7 @@ namespace ProjectManagement.WebUI.Controllers
             {
                 if (authProvider.Authenticate(model.Email, model.Password))
                 {
-                    return Redirect(Url.Action("ViewProjects", "Project"));
+                    return Redirect(Url.Action("ViewProjects", "Home"));
                 }
                 else
                 {

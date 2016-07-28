@@ -19,21 +19,6 @@ namespace ProjectManagement.WebUI.Controllers
             repository = data;
         }
 
-        public ViewResult ViewProjects()
-        {
-            List<ProjectsViewModel> projectsToShow = new List<ProjectsViewModel>();
 
-            foreach (var project in repository.Projects.OrderByDescending(d=>d.createDate).Take(5).ToList())
-            {
-                projectsToShow.Add(new ProjectsViewModel
-                {
-                    id = project.id,
-                    name = project.name,
-                    createDate = project.createDate,
-                    Initiator = repository.Users.FirstOrDefault(u=>u.id == project.fkInitiator).name
-                });
-            }
-            return View(projectsToShow);
-        }
     }
 }

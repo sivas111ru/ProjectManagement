@@ -9,10 +9,11 @@ namespace ProjectManagement.WebUI.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Поле не может быть пустым")]
         [DisplayName("Почтовый адресс")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Поле не может быть пустым")]
         [DataType(DataType.Password)]
         [DisplayName("Пароль")]
         public string Password { get; set; }

@@ -10,5 +10,7 @@ namespace ProjectManagement.Domain.Abstract
     public interface IDataRepository
     {
         IQueryable<User> Users { get; }
+
+        IQueryable<Project> Projects { get; }
     }
 }

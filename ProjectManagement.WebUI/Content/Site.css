@@ -15,3 +15,13 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+
+/* forms */
+
+.form-centered {
+    margin: 0 auto;
+}
+
+.form-sm {
+    width: 300px;
+}

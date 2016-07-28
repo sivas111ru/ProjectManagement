@@ -12,5 +12,6 @@ namespace ProjectManagement.Domain.Concrete
     {
         private EFDbContext context = new EFDbContext();
         public IQueryable<User> Users => context.Users;
+        public IQueryable<Project> Projects => context.Projects;
     }
 }

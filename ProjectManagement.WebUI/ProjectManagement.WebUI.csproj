@@ -225,6 +225,7 @@
     <Content Include="Views\Test\Test.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ResetPass.cshtml" />
+    <Content Include="Views\Shared\_Base.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,7 +27,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @Html.ActionLink(item.name,"Edit","Project")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.createDate)

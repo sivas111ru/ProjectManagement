@@ -20,19 +20,16 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ViewProjects()
         {
-            List<ProjectsViewModel> projectsToShow = new List<ProjectsViewModel>();
-
-            foreach (var project in repository.Projects.OrderByDescending(d => d.createDate).Take(5).ToList())
-            {
-                projectsToShow.Add(new ProjectsViewModel
+            return View((from a in repository.Projects.OrderByDescending(d => d.createDate).Take(5)
+                join b in repository.Users on a.fkInitiator equals b.id
+                select new ProjectsViewModel
                 {
-                    id = project.id,
-                    name = project.name,
-                    createDate = project.createDate,
-                    Initiator = repository.Users.FirstOrDefault(u => u.id == project.fkInitiator).name
-                });
-            }
-            return View(projectsToShow);
+                    id = a.id,
+                    name = a.name,
+                    createDate = a.createDate,
+                    Initiator = b.name
+                }
+                ));
         }
     }
 }

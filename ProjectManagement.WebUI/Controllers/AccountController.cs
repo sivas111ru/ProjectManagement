@@ -60,7 +60,7 @@ namespace ProjectManagement.WebUI.Controllers
         {
             if (resetPass.Reset(model.Email))
             {
-                TempData["message"] = string.Format("Success. Check you email");
+                TempData["message"] = string.Format("Success. Check your email");
                 return Redirect(Url.Action("Login", "Account"));
             }
             else

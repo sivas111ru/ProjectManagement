@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ProjectManagement.WebUI.Infrastructure.Abstract;
 using ProjectManagement.WebUI.Models;
 
@@ -42,6 +43,13 @@ namespace ProjectManagement.WebUI.Controllers
             return View();
         }
 
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("Login", "Account");
+        }
+
         public ViewResult ResetPass()
         {
             return View();
@@ -55,7 +63,12 @@ namespace ProjectManagement.WebUI.Controllers
                 TempData["message"] = string.Format("Success. Check you email");
                 return Redirect(Url.Action("Login", "Account"));
             }
-            return View();
+            else
+            {
+                TempData["message"] = string.Format("Failed. This email is not registered");
+                return View();
+            }
+            
         }
 
     }

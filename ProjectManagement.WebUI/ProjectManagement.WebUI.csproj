@@ -182,6 +182,7 @@
     <Compile Include="Infrastructure\Concrete\PMRoleProvider.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ProjectPageViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel.cs" />
     <Compile Include="Models\ResetPassViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,10 +231,10 @@
     <Content Include="Views\Account\ResetPass.cshtml" />
     <Content Include="Views\Shared\_Base.cshtml" />
     <Content Include="Views\Home\ViewProjects.cshtml" />
+    <Content Include="Views\Project\ProjectPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

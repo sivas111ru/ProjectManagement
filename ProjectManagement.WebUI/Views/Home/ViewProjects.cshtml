@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.id)
         </td>
         <td>
-            @Html.ActionLink(item.name, "Edit", "Project", new { id = item.id }, null)
+            @Html.ActionLink(item.name, "ProjectPage", "Project", new { id = item.id }, null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.createDate)

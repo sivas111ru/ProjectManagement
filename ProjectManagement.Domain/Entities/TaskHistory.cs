@@ -7,7 +7,7 @@ namespace ProjectManagement.Domain.Entities
     using System.Data.Entity.Spatial;
 
     [Table("TasksHistory")]
-    public partial class TasksHistory
+    public partial class TaskHistory
     {
         public int id { get; set; }
 
@@ -23,10 +23,10 @@ namespace ProjectManagement.Domain.Entities
 
         public DateTime dateTime { get; set; }
 
-        public virtual Tasks Tasks { get; set; }
+        public virtual Task Tasks { get; set; }
 
-        public virtual TasksHistoryTypes TasksHistoryTypes { get; set; }
+        public virtual TasksHistoryType TasksHistoryTypes { get; set; }
 
-        public virtual Users Users { get; set; }
+        public virtual User Users { get; set; }
     }
 }

@@ -6,12 +6,12 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Projects
+    public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Projects()
+        public Project()
         {
-            Tasks = new HashSet<Tasks>();
+            Tasks = new HashSet<Task>();
         }
 
         public int id { get; set; }
@@ -28,9 +28,9 @@ namespace ProjectManagement.Domain.Entities
 
         public string description { get; set; }
 
-        public virtual Users Users { get; set; }
+        public virtual User Users { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tasks> Tasks { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

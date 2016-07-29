@@ -13,14 +13,14 @@ namespace ProjectManagement.Domain.Concrete
     {
         private ProjectManagementContext context = new ProjectManagementContext();
 
-        public IQueryable<Logs> Logs => context.Logs.AsQueryable() ;
-        public IQueryable<Projects> Projects => context.Projects.AsQueryable();
+        public IQueryable<Log> Logs => context.Logs.AsQueryable() ;
+        public IQueryable<Project> Projects => context.Projects.AsQueryable();
         public IQueryable<sysdiagrams> sysdiagrams => context.sysdiagrams.AsQueryable();
-        public IQueryable<Tasks> Tasks => context.Tasks.AsQueryable();
-        public IQueryable<TasksHistory> TasksHistory => context.TasksHistory.AsQueryable();
-        public IQueryable<TasksHistoryTypes> TasksHistoryTypes => context.TasksHistoryTypes.AsQueryable();
-        public IQueryable<TasksStatuses> TasksStatuses => context.TasksStatuses.AsQueryable();
-        public IQueryable<Users> Users => context.Users.AsQueryable();
-        public IQueryable<UsersTasksMap> UsersTasksMap => context.UsersTasksMap.AsQueryable();
+        public IQueryable<Entities.Task> Tasks => context.Tasks.AsQueryable();
+        public IQueryable<TaskHistory> TasksHistory => context.TasksHistory.AsQueryable();
+        public IQueryable<TasksHistoryType> TasksHistoryTypes => context.TasksHistoryTypes.AsQueryable();
+        public IQueryable<TasksStatus> TasksStatuses => context.TasksStatuses.AsQueryable();
+        public IQueryable<User> Users => context.Users.AsQueryable();
+        public IQueryable<UserTaskMap> UsersTasksMap => context.UsersTasksMap.AsQueryable();
     }
 }

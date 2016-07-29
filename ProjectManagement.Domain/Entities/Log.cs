@@ -6,19 +6,22 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("UsersTasksMap")]
-    public partial class UsersTasksMap
+    public partial class Log
     {
         public int id { get; set; }
 
         public int fkUser { get; set; }
 
-        public int fkTask { get; set; }
+        public DateTime dateTime { get; set; }
 
-        public bool active { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string message { get; set; }
 
-        public virtual Tasks Tasks { get; set; }
+        public byte status { get; set; }
 
-        public virtual Users Users { get; set; }
+        public int type { get; set; }
+
+        public virtual User Users { get; set; }
     }
 }

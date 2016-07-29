@@ -6,21 +6,23 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TasksHistoryTypes
+    public partial class TasksStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TasksHistoryTypes()
+        public TasksStatus()
         {
-            TasksHistory = new HashSet<TasksHistory>();
+            Tasks = new HashSet<Task>();
         }
 
         public int id { get; set; }
 
+        public bool active { get; set; }
+
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TasksHistory> TasksHistory { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

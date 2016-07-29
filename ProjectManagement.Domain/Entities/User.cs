@@ -6,15 +6,15 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Users
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public User()
         {
-            Logs = new HashSet<Logs>();
-            Projects = new HashSet<Projects>();
-            TasksHistory = new HashSet<TasksHistory>();
-            UsersTasksMap = new HashSet<UsersTasksMap>();
+            Logs = new HashSet<Log>();
+            Projects = new HashSet<Project>();
+            TasksHistory = new HashSet<TaskHistory>();
+            UsersTasksMap = new HashSet<UserTaskMap>();
         }
 
         public int id { get; set; }
@@ -40,15 +40,15 @@ namespace ProjectManagement.Domain.Entities
         public bool notification { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Logs> Logs { get; set; }
+        public virtual ICollection<Log> Logs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projects> Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TasksHistory> TasksHistory { get; set; }
+        public virtual ICollection<TaskHistory> TasksHistory { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersTasksMap> UsersTasksMap { get; set; }
+        public virtual ICollection<UserTaskMap> UsersTasksMap { get; set; }
     }
 }

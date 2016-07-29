@@ -6,13 +6,13 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Tasks
+    public partial class Task
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tasks()
+        public Task()
         {
-            TasksHistory = new HashSet<TasksHistory>();
-            UsersTasksMap = new HashSet<UsersTasksMap>();
+            TasksHistory = new HashSet<TaskHistory>();
+            UsersTasksMap = new HashSet<UserTaskMap>();
         }
 
         public int id { get; set; }
@@ -36,14 +36,14 @@ namespace ProjectManagement.Domain.Entities
 
         public DateTime? endDate { get; set; }
 
-        public virtual Projects Projects { get; set; }
+        public virtual Project Projects { get; set; }
 
-        public virtual TasksStatuses TasksStatuses { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TasksHistory> TasksHistory { get; set; }
+        public virtual TasksStatus TasksStatuses { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersTasksMap> UsersTasksMap { get; set; }
+        public virtual ICollection<TaskHistory> TasksHistory { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserTaskMap> UsersTasksMap { get; set; }
     }
 }

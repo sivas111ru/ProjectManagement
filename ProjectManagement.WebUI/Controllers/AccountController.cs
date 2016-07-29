@@ -50,8 +50,6 @@ namespace ProjectManagement.WebUI.Controllers
         public ActionResult UserPage()
         {
             var userName = User.Identity.Name;
-            Debug.Write(userName);
-            // var user = repository.Users.Where(u => u.name == userName).Select(u => new Users);
             return View();
         }
 

@@ -7,7 +7,7 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class ProjectManagementContext : DbContext, IDataRepository
+    public partial class ProjectManagementContext : DbContext
     {
         public ProjectManagementContext()
             : base("name=ProjectManagementContext")

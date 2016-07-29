@@ -10,14 +10,14 @@ namespace ProjectManagement.Domain.Abstract
 {
     public interface IDataRepository
     {
-        DbSet<Logs> Logs { get; set; }
-        DbSet<Projects> Projects { get; set; }
-        DbSet<sysdiagrams> sysdiagrams { get; set; }
-        DbSet<Tasks> Tasks { get; set; }
-        DbSet<TasksHistory> TasksHistory { get; set; }
-        DbSet<TasksHistoryTypes> TasksHistoryTypes { get; set; }
-        DbSet<TasksStatuses> TasksStatuses { get; set; }
-        DbSet<Users> Users { get; set; }
-        DbSet<UsersTasksMap> UsersTasksMap { get; set; }
+        IQueryable<Logs> Logs { get; }
+        IQueryable<Projects> Projects { get; }
+        IQueryable<sysdiagrams> sysdiagrams { get; }
+        IQueryable<Tasks> Tasks { get; }
+        IQueryable<TasksHistory> TasksHistory { get; }
+        IQueryable<TasksHistoryTypes> TasksHistoryTypes { get; }
+        IQueryable<TasksStatuses> TasksStatuses { get; }
+        IQueryable<Users> Users { get; }
+        IQueryable<UsersTasksMap> UsersTasksMap { get; }
     }
 }

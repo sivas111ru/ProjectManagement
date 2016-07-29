@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,11 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDataRepository.cs" />
-    <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFDataRepository.cs" />
-    <Compile Include="Entities\Project.cs" />
-    <Compile Include="Entities\Task.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Logs.cs" />
+    <Compile Include="Entities\ProjectManagementContext.cs" />
+    <Compile Include="Entities\Projects.cs" />
+    <Compile Include="Entities\sysdiagrams.cs" />
+    <Compile Include="Entities\Tasks.cs" />
+    <Compile Include="Entities\TasksHistory.cs" />
+    <Compile Include="Entities\TasksHistoryTypes.cs" />
+    <Compile Include="Entities\TasksStatuses.cs" />
+    <Compile Include="Entities\Users.cs" />
+    <Compile Include="Entities\UsersTasksMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

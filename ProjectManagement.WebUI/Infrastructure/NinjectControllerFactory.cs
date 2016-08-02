@@ -33,6 +33,7 @@ namespace ProjectManagement.WebUI.Infrastructure
         {
             // configure container
             ninjectKernel.Bind<IDataRepository>().To<EFDataRepository>();
+            ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
             ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
             ninjectKernel.Bind<IResetPass>().To<PMResetPass>();
         }

@@ -50,7 +50,10 @@ namespace ProjectManagement.WebUI.Controllers
         public ActionResult UserPage()
         {
             var userName = User.Identity.Name;
-            return View();
+
+            var user = repository.Users.Where(u => u.name == userName).FirstOrDefault();
+
+            return View(user);
         }
 
         public ActionResult LogOff()

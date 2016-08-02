@@ -1,7 +1,10 @@
-﻿@{
-    ViewBag.Title = "Моя страница";
+﻿@model ProjectManagement.Domain.Entities.User
+
+@{
+    ViewBag.Title = "UserPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Моя страница</h1>
+<h2>Мои данные</h2>
 
+@Html.EditorForModel(Model)

@@ -23,9 +23,8 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ViewProjects()
         {
-            var result = repository.GetLastNProjects(5);
 
-            return View((from a in result
+            /*return View((from a in repository.GetLastNProjects(5)
                          join b in userRepository.Users on a.fkInitiator equals b.id
                 select new ProjectsViewModel
                 {
@@ -34,7 +33,15 @@ namespace ProjectManagement.WebUI.Controllers
                     createDate = a.createDate,
                     Initiator = b.name
                 }
-                ));
+                ));*/
+
+            return View(repository.GetLastNProjects(5).Select(p => new ProjectsViewModel
+            {
+                id = p.id,
+                Initiator = p.Users.name,
+                name = p.name,
+                createDate = p.createDate
+            }));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ProjectManagement.Domain.Entities.User
+﻿@model ProjectManagement.WebUI.Models.UserPageViewModel
 
 @{
     ViewBag.Title = "UserPage";
@@ -9,27 +9,29 @@
 
 @using (Html.BeginForm())
 {
+        @Html.HiddenFor(model => model.Id)
+
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.name, htmlAttributes: new {@class = "control-label"})
-                @Html.EditorFor(model => model.name, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.name, "", new {@class = "text-danger"})
+                @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.email, htmlAttributes: new {@class = "control-label"})
-                @Html.EditorFor(model => model.email, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.email, "", new {@class = "text-danger"})
+                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.notification, htmlAttributes: new {@class = "control-label"})
-                @Html.EditorFor(model => model.notification, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.notification, "", new {@class = "text-danger"})
+                @Html.LabelFor(model => model.IsNotification, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.IsNotification, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.IsNotification, "", new {@class = "text-danger"})
             </div>
         </div>
 

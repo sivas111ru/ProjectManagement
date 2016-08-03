@@ -52,17 +52,34 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult UserPage()
         {
-            var userName = User.Identity.Name;
+            var userEmail = User.Identity.Name;
 
-            var user = repository.Users.Where(u => u.name == userName).FirstOrDefault();
+            var user = userRepository.GetUserByEmail(userEmail);
 
-            return View(user);
+            if (user == null)
+                return Redirect("http://google.com");
+
+            UserPageViewModel model = new UserPageViewModel
+            {
+                Id = user.id,
+                Email = user.email,
+                Name = user.name,
+                IsNotification = user.notification
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult UserPage(User user)
+        public ActionResult UserPage(UserPageViewModel user)
         {
-            userRepository.UpdateUser(user);
+            var u = userRepository.GetUserById(user.Id);
+
+            u.name = user.Name;
+            u.email = user.Email;
+            u.notification = user.IsNotification;
+
+            userRepository.EditUser(u);
 
             return View(user);
         }

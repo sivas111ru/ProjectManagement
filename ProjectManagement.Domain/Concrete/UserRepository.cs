@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,8 @@ namespace ProjectManagement.Domain.Concrete
         public bool UpdateUser(User user)
         {
             base.dbContext.Users.AddOrUpdate(user);
+            dbContext.SaveChanges();
+
             dbContext.SaveChanges();
 
             return true;

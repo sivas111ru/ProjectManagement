@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using ProjectManagement.Domain.Abstract;
+using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Infrastructure.Abstract;
 using ProjectManagement.WebUI.Models;
 
@@ -52,6 +53,14 @@ namespace ProjectManagement.WebUI.Controllers
             var userName = User.Identity.Name;
 
             var user = repository.Users.Where(u => u.name == userName).FirstOrDefault();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult UserPage(User user)
+        {
+            
 
             return View(user);
         }

@@ -1,0 +1,41 @@
+﻿@model ProjectManagement.Domain.Entities.User
+
+@{
+    ViewBag.Title = "UserPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои данные</h2>
+
+@using (Html.BeginForm())
+{
+        <div class="row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.name, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.name, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.email, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.email, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.email, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.notification, htmlAttributes: new {@class = "control-label"})
+                @Html.EditorFor(model => model.notification, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.notification, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="submit" value="Сохранить" class="btn btn-default pull-right" />
+            </div>
+        </div>
+}

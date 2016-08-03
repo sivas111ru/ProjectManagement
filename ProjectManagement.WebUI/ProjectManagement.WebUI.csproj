@@ -232,6 +232,7 @@
     <Content Include="Views\Shared\_Base.cshtml" />
     <Content Include="Views\Home\ViewProjects.cshtml" />
     <Content Include="Views\Project\ProjectPage.cshtml" />
+    <Content Include="Views\Account\UserPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

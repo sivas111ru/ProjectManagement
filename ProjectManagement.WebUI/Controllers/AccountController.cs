@@ -50,7 +50,7 @@ namespace ProjectManagement.WebUI.Controllers
             return View();
         }
 
-        public ActionResult UserPage()
+        public ViewResult UserPage()
         {
             var userName = User.Identity.Name;
 
@@ -62,7 +62,7 @@ namespace ProjectManagement.WebUI.Controllers
         [HttpPost]
         public ActionResult UserPage(User user)
         {
-            userRepository.EditUser(user);
+            userRepository.UpdateUser(user);
 
             return View(user);
         }

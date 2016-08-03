@@ -1,3 +1,5 @@
+using System.Web.Mvc;
+
 namespace ProjectManagement.Domain.Entities
 {
     using System;
@@ -15,10 +17,13 @@ namespace ProjectManagement.Domain.Entities
             UsersTasksMap = new HashSet<UserTaskMap>();
         }
 
+        [HiddenInput(DisplayValue = false)]
         public int id { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int fkProject { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public bool active { get; set; }
 
         [Required]

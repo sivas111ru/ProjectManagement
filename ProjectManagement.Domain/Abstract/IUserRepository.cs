@@ -21,6 +21,6 @@ namespace ProjectManagement.Domain.Abstract
 
         bool AddUser(User user);
 
-        bool EditUser(User user);
+        bool UpdateUser(User user);
     }
 }

@@ -49,7 +49,7 @@ namespace ProjectManagement.Domain.Concrete
             return true;
         }
 
-        public bool EditUser(User user)
+        public bool UpdateUser(User user)
         {
             base.dbContext.Users.AddOrUpdate(user);
             dbContext.SaveChanges();

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ProjectManagement.Domain.Abstract;
+using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Infrastructure.Abstract;
 using ProjectManagement.WebUI.Models;
 
@@ -13,11 +16,15 @@ namespace ProjectManagement.WebUI.Controllers
     {
         private IAuthProvider authProvider;
         private IResetPass resetPass;
+        private IDataRepository repository;
+        private IUserRepository userRepository;
 
-        public AccountController(IAuthProvider auth, IResetPass passR)
+        public AccountController(IAuthProvider auth, IResetPass passR, IDataRepository data, IUserRepository userRepo)
         {
             authProvider = auth;
             resetPass = passR;
+            repository = data;
+            userRepository = userRepo;
         }
         public ViewResult Login()
         {
@@ -41,6 +48,23 @@ namespace ProjectManagement.WebUI.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult UserPage()
+        {
+            var userName = User.Identity.Name;
+
+            var user = repository.Users.Where(u => u.name == userName).FirstOrDefault();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult UserPage(User user)
+        {
+            userRepository.EditUser(user);
+
+            return View(user);
         }
 
         public ActionResult LogOff()

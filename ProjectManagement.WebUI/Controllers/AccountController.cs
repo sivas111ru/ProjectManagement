@@ -17,12 +17,14 @@ namespace ProjectManagement.WebUI.Controllers
         private IAuthProvider authProvider;
         private IResetPass resetPass;
         private IDataRepository repository;
+        private IUserRepository userRepository;
 
-        public AccountController(IAuthProvider auth, IResetPass passR, IDataRepository data)
+        public AccountController(IAuthProvider auth, IResetPass passR, IDataRepository data, IUserRepository userRepo)
         {
             authProvider = auth;
             resetPass = passR;
             repository = data;
+            userRepository = userRepo;
         }
         public ViewResult Login()
         {
@@ -60,7 +62,7 @@ namespace ProjectManagement.WebUI.Controllers
         [HttpPost]
         public ActionResult UserPage(User user)
         {
-            
+            userRepository.EditUser(user);
 
             return View(user);
         }

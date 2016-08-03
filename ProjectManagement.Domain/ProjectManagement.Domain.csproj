@@ -53,7 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDataRepository.cs" />
+    <Compile Include="Abstract\IProjectRepository.cs" />
+    <Compile Include="Abstract\ITaskRepository.cs" />
+    <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\BaseRepository.cs" />
     <Compile Include="Concrete\EFDataRepository.cs" />
+    <Compile Include="Concrete\ProjectRepository.cs" />
+    <Compile Include="Concrete\TaskRepository.cs" />
+    <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\ProjectManagementContext.cs" />
     <Compile Include="Entities\Project.cs" />

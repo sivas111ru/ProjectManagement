@@ -57,7 +57,7 @@ namespace ProjectManagement.WebUI.Controllers
             var user = userRepository.GetUserByEmail(userEmail);
 
             if (user == null)
-                return Redirect("http://google.com");
+                return View();
 
             UserPageViewModel model = new UserPageViewModel
             {
@@ -79,7 +79,7 @@ namespace ProjectManagement.WebUI.Controllers
             u.email = user.Email;
             u.notification = user.IsNotification;
 
-            userRepository.EditUser(u);
+            userRepository.UpdateUser(u);
 
             return View(user);
         }

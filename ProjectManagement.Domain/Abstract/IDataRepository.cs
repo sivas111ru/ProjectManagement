@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjectManagement.Domain.Entities;
+using Task = ProjectManagement.Domain.Entities.Task;
 
 namespace ProjectManagement.Domain.Abstract
 {

@@ -150,5 +150,13 @@ namespace ProjectManagement.Domain.Concrete
         {
             return TasksHistoryTypes.FirstOrDefault(t => t.id.Equals(id));
         }
+
+        public List<User> GetUsersAssignedToTask(int taskId)
+        {
+            return
+                dbContext.UsersTasksMap.Where(m => m.fkTask == taskId)
+                    .Join(dbContext.Users, map => map.fkUser, u => u.id, (map, u) => u)
+                    .ToList();
+        }
     }
 }

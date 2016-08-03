@@ -11,7 +11,7 @@ namespace ProjectManagement.WebUI.Models
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
-        public List<string> UsersToTask { get; set; }
+        public List<User> UsersToTask { get; set; }
         public string Name { get; set; }
         public int Status { get; set; }
         public byte Priority { get; set; }

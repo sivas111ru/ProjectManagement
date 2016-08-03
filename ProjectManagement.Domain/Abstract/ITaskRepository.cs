@@ -36,6 +36,7 @@ namespace ProjectManagement.Domain.Abstract
         bool AddUserTaskMap(int usrId, int tskId);
         List<Task> GetAllTaskByUserId(int id);
         List<int> GetUsersIdbyTaskId(int id);
+        List<User> GetUsersAssignedToTask(int taskId);
 
     }
 }

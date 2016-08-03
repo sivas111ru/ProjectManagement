@@ -17,6 +17,5 @@ namespace ProjectManagement.Domain.Abstract
         bool DeleteUserById(int id);
         bool AddUser(User user);
         bool UpdateUser(User user);
-        List<User> GetAllUserByTaskId(int id);
     }
 }

@@ -11,17 +11,7 @@ namespace ProjectManagement.WebUI.Controllers
     [Authorize(Roles = "admin,user")]
     public class TestController : Controller
     {
-        private IDataRepository repository;
-
-        public TestController(IDataRepository userRepository)
-        {
-            repository = userRepository;
-        }
-
-        public ViewResult Test()
-        {
-            return View(repository.Users);
-        }
+       
 
     }
 }

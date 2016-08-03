@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,35 +11,54 @@ namespace ProjectManagement.Domain.Concrete
 {
     public class TaskRepository: BaseRepository, ITaskRepository
     {
-        public IQueryable<Task> Tasks { get; }
+        public IQueryable<Task> Tasks => dbContext.Tasks.AsQueryable();
         public Task GetTaskById(int id)
         {
-            throw new NotImplementedException();
+            return Tasks.FirstOrDefault(t => t.id.Equals(id));
         }
 
         public bool AddTask(Task task)
         {
-            throw new NotImplementedException();
+            if (task == null) return false;
+        
+            dbContext.Tasks.AddOrUpdate(task);
+            return true;
         }
 
         public bool DeleteTask(Task task)
         {
-            throw new NotImplementedException();
+
+            if (task == null ) return false;
+
+            task.active = false;
+            dbContext.Tasks.AddOrUpdate(task);
+
+            return true;
         }
 
         public bool DeleteTask(int id)
         {
-            throw new NotImplementedException();
+            var tsk = Tasks.FirstOrDefault(t => t.id.Equals(id));
+
+            if (tsk == null) return false;
+
+            tsk.active = false;
+            dbContext.Tasks.AddOrUpdate(tsk);
+
+            return true;
         }
 
         public bool UpdateTask(Task task)
         {
-            throw new NotImplementedException();
+            if (task == null) return false;
+
+            dbContext.Tasks.AddOrUpdate(task);
+            return true;
         }
 
         public List<Task> GetTasksByProjectId(int id)
         {
-            throw new NotImplementedException();
+            return Tasks.Where(t => t.fkProject.Equals(id) && t.active).ToList();
         }
 
         public List<Task> GetTasksByUserId(int id)

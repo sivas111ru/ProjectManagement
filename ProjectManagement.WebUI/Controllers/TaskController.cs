@@ -24,12 +24,14 @@ namespace ProjectManagement.WebUI.Controllers
             taskRepository = tData;
         }
 
-        public ViewResult EditTask(int id)
+        public ActionResult EditTask(int id)
         {
             var task = taskRepository.GetTaskById(id);
 
+            if (task == null)
+                return RedirectToAction("ViewProjects", "Home");
 
-            var statuses = repository.TasksStatuses.ToList().Select(ts => new SelectListItem
+            var statuses = repository.TasksStatuses.Select(ts => new SelectListItem
             {
                 Text = ts.name,
                 Value = ts.id.ToString()
@@ -43,30 +45,33 @@ namespace ProjectManagement.WebUI.Controllers
 
             return View(new TaskViewModel
             {
-                Task = task,
+                Id = task.id,
+                Name = task.name,
+                Description = task.description,
+                Status = task.status,
+                StartDate = task.startDate,
+                EndDate = task.endDate,
                 StatusAll = statuses,
-                UsersToTask = usersToTask,
-                SelectedStatus = task.status
+                UsersToTask = usersToTask
             });
         }
 
         [HttpPost]
-        public ActionResult EditTask(TaskViewModel model, string status)
+        public ActionResult EditTask(TaskViewModel model)
         {
-            Task task = taskRepository.GetTaskById(model.Task.id);
+            Task task = taskRepository.GetTaskById(model.Id);
 
             if (ModelState.IsValid && task != null)
             {
-                task.name = model.Task.name;
-                task.description = model.Task.description;
-                task.status = model.SelectedStatus;
-                task.priority = model.Task.priority;
-                task.startDate = model.Task.startDate;
-                task.endDate = model.Task.endDate;
+                task.name = model.Name;
+                task.description = model.Description;
+                task.status = model.Status;
+                task.priority = model.Priority;
+                task.startDate = model.StartDate;
+                task.endDate = model.EndDate;
 
                 taskRepository.UpdateTask(task);
             }
-
 
             return RedirectToAction("EditTask");
         }

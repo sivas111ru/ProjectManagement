@@ -23,23 +23,7 @@ namespace ProjectManagement.Domain.Concrete
 
         public List<Project> GetLastNProjects(int projectNumber)
         {
-          /*  var l =  Projects.OrderByDescending(p => p.createDate)
-                .Take(projectNumber)
-                .Join(dbContext.Users, p => p.fkInitiator, u => u.id, (p, u) => new {Project = p, User = u}).ToList();
-
-            List<Project> result = new List<Project>();
-
-            foreach (var o in l)
-            {
-                o.Project.Users = o.User;
-                result.Add(o.Project);
-            }
-
-
-            return result;*/
-
             return (Projects.OrderByDescending(d => d.createDate).Take(projectNumber)).ToList();
-
         }
 
         public List<Project> GetProjects()

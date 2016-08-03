@@ -12,13 +12,5 @@ namespace ProjectManagement.Domain.Abstract
     public interface IDataRepository
     {
         IQueryable<Log> Logs { get; }
-        IQueryable<Project> Projects { get; }
-        IQueryable<sysdiagrams> sysdiagrams { get; }
-        IQueryable<Entities.Task> Tasks { get; }
-        IQueryable<TaskHistory> TasksHistory { get; }
-        IQueryable<TasksHistoryType> TasksHistoryTypes { get; }
-        IQueryable<TasksStatuses> TasksStatuses { get; }
-        IQueryable<User> Users { get; }
-        IQueryable<UserTaskMap> UsersTasksMap { get; }
     }
 }

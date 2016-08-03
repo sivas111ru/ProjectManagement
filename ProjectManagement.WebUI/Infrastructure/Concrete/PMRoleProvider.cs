@@ -11,7 +11,7 @@ namespace ProjectManagement.WebUI.Infrastructure.Concrete
 {
     public class PMRoleProvider: RoleProvider
     {
-        private IDataRepository repository = new EFDataRepository(); // OMG!
+        private IDataRepository repository = new DataRepository(); // OMG!
 
         public override string[] GetRolesForUser(string email)
         {

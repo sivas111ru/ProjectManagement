@@ -12,15 +12,11 @@ namespace ProjectManagement.Domain.Abstract
         IQueryable<User> Users { get; }
 
         User GetUserById(int id);
-
         User GetUserByName(string name);
-
         User GetUserByEmail(string email);
-
         bool DeleteUserById(int id);
-
         bool AddUser(User user);
-
         bool UpdateUser(User user);
+        List<User> GetAllUserByTaskId(int id);
     }
 }

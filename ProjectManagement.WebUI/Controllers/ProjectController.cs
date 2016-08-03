@@ -13,9 +13,9 @@ namespace ProjectManagement.WebUI.Controllers
     [Authorize]
     public class ProjectController : Controller
     {
-        private IDataRepository repository;
+        private IProjectRepository repository;
 
-        public ProjectController(IDataRepository data)
+        public ProjectController(IProjectRepository data)
         {
             repository = data;
         }
@@ -23,17 +23,8 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ProjectPage(int id)
         {
-            var result = (from p in repository.Projects where p.id == id   // to optimize
-                           join t in repository.Tasks on p.id equals t.fkProject
-                           join upm in repository.UsersTasksMap on t.id equals upm.fkTask
-                           join u in repository.Users on upm.fkUser equals u.id
-                           select u).ToList();
- 
-
-
-
-            return View(new ProjectPageViewModel() { UsersInvolved = result, Description = repository.Projects.Where(i => i.id == id).Select(d => d.description).FirstOrDefault() });
-
+            return View(new ProjectPageViewModel() { UsersInvolved = repository.GetAllUsersByProjectId(id),
+                                                     Description = repository.Projects.Where(i => i.id == id).Select(d => d.description).FirstOrDefault() });
         }
     }
 }

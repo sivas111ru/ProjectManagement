@@ -1,13 +1,11 @@
-using System.Web.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
 
 namespace ProjectManagement.Domain.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     public partial class Task
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -16,14 +14,8 @@ namespace ProjectManagement.Domain.Entities
             TasksHistory = new HashSet<TaskHistory>();
             UsersTasksMap = new HashSet<UserTaskMap>();
         }
-
-        [HiddenInput(DisplayValue = false)]
         public int id { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
         public int fkProject { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
         public bool active { get; set; }
 
         [Required]

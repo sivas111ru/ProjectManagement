@@ -9,10 +9,16 @@ namespace ProjectManagement.WebUI.Models
 {
     public class TaskViewModel
     {
-        public List<SelectListItem> StatusAll { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
         public List<string> UsersToTask { get; set; }
+        public string Name { get; set; }
+        public int Status { get; set; }
+        public byte Priority { get; set; }
+        public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public Task Task { get; set; }
-        public int SelectedStatus { get; set; }
+        public List<SelectListItem> StatusAll { get; set; }
     }
 }

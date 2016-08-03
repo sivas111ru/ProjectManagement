@@ -19,7 +19,7 @@ namespace ProjectManagement.Domain.Concrete
         public IQueryable<Entities.Task> Tasks => context.Tasks.AsQueryable();
         public IQueryable<TaskHistory> TasksHistory => context.TasksHistory.AsQueryable();
         public IQueryable<TasksHistoryType> TasksHistoryTypes => context.TasksHistoryTypes.AsQueryable();
-        public IQueryable<TasksStatus> TasksStatuses => context.TasksStatuses.AsQueryable();
+        public IQueryable<TasksStatuses> TasksStatuses => context.TasksStatuses.AsQueryable();
         public IQueryable<User> Users => context.Users.AsQueryable();
         public IQueryable<UserTaskMap> UsersTasksMap => context.UsersTasksMap.AsQueryable();
     }

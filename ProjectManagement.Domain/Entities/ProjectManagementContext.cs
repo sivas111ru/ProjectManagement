@@ -20,7 +20,7 @@ namespace ProjectManagement.Domain.Entities
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<TaskHistory> TasksHistory { get; set; }
         public virtual DbSet<TasksHistoryType> TasksHistoryTypes { get; set; }
-        public virtual DbSet<TasksStatus> TasksStatuses { get; set; }
+        public virtual DbSet<TasksStatuses> TasksStatuses { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserTaskMap> UsersTasksMap { get; set; }
 
@@ -78,11 +78,11 @@ namespace ProjectManagement.Domain.Entities
                 .HasForeignKey(e => e.fkTaskHistoryTypes)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TasksStatus>()
+            modelBuilder.Entity<TasksStatuses>()
                 .Property(e => e.name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<TasksStatus>()
+            modelBuilder.Entity<TasksStatuses>()
                 .HasMany(e => e.Tasks)
                 .WithRequired(e => e.TasksStatuses)
                 .HasForeignKey(e => e.status)

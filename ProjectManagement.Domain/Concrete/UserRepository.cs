@@ -37,6 +37,7 @@ namespace ProjectManagement.Domain.Concrete
 
             user.active = false;
             base.dbContext.Users.AddOrUpdate(user);
+            dbContext.SaveChanges();
 
             return true;
         }
@@ -44,12 +45,14 @@ namespace ProjectManagement.Domain.Concrete
         public bool AddUser( User user )
         {
             base.dbContext.Users.AddOrUpdate(user);
+            dbContext.SaveChanges();
             return true;
         }
 
         public bool EditUser(User user)
         {
             base.dbContext.Users.AddOrUpdate(user);
+            dbContext.SaveChanges();
 
             return true;
         }

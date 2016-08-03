@@ -68,7 +68,7 @@
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\TaskHistory.cs" />
     <Compile Include="Entities\TasksHistoryType.cs" />
-    <Compile Include="Entities\TasksStatus.cs" />
+    <Compile Include="Entities\TasksStatuses.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserTaskMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

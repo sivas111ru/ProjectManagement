@@ -18,6 +18,7 @@ namespace ProjectManagement.Domain.Concrete
         public bool CreateProject(Project project)
         {
             dbContext.Projects.AddOrUpdate(project);
+            dbContext.SaveChanges();
             return true;
         }
 
@@ -39,6 +40,7 @@ namespace ProjectManagement.Domain.Concrete
         public bool EditProject(Project project)
         {
             dbContext.Projects.AddOrUpdate(project);
+            dbContext.SaveChanges();
             return true;
         }
 
@@ -52,6 +54,7 @@ namespace ProjectManagement.Domain.Concrete
             project.active = false;
 
             dbContext.Projects.AddOrUpdate(project);
+            dbContext.SaveChanges();
 
             return true;
         }

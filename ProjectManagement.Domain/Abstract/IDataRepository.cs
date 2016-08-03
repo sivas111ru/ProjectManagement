@@ -17,7 +17,7 @@ namespace ProjectManagement.Domain.Abstract
         IQueryable<Entities.Task> Tasks { get; }
         IQueryable<TaskHistory> TasksHistory { get; }
         IQueryable<TasksHistoryType> TasksHistoryTypes { get; }
-        IQueryable<TasksStatus> TasksStatuses { get; }
+        IQueryable<TasksStatuses> TasksStatuses { get; }
         IQueryable<User> Users { get; }
         IQueryable<UserTaskMap> UsersTasksMap { get; }
     }

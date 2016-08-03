@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +186,7 @@
     <Compile Include="Models\ProjectPageViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel.cs" />
     <Compile Include="Models\ResetPassViewModel.cs" />
+    <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +235,7 @@
     <Content Include="Views\Home\ViewProjects.cshtml" />
     <Content Include="Views\Project\ProjectPage.cshtml" />
     <Content Include="Views\Account\UserPage.cshtml" />
+    <Content Include="Views\Task\EditTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

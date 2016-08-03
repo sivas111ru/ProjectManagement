@@ -1,0 +1,29 @@
+﻿@model ProjectManagement.WebUI.Models.TaskViewModel
+
+
+
+@{
+
+    ViewBag.Title = "EditTask";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>EditTask</h2>
+
+
+@using (Html.BeginForm("EditTask", "Task"))
+
+{
+    @Html.EditorFor(model => model.Task)
+
+
+    @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusAll)
+
+
+    <input type="submit" value="Save"/>
+
+
+    @Html.ActionLink("Cancel and return to List", "ViewProjects", "Home")
+}

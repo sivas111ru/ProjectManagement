@@ -38,7 +38,7 @@ namespace ProjectManagement.Domain.Entities
 
         public virtual Project Projects { get; set; }
 
-        public virtual TasksStatus TasksStatuses { get; set; }
+        public virtual TasksStatuses TasksStatuses { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskHistory> TasksHistory { get; set; }

@@ -22,6 +22,7 @@ namespace ProjectManagement.Domain.Concrete
             if (task == null) return false;
         
             dbContext.Tasks.AddOrUpdate(task);
+            dbContext.SaveChanges();
             return true;
         }
 
@@ -32,6 +33,7 @@ namespace ProjectManagement.Domain.Concrete
 
             task.active = false;
             dbContext.Tasks.AddOrUpdate(task);
+            dbContext.SaveChanges();
 
             return true;
         }
@@ -44,6 +46,7 @@ namespace ProjectManagement.Domain.Concrete
 
             tsk.active = false;
             dbContext.Tasks.AddOrUpdate(tsk);
+            dbContext.SaveChanges();
 
             return true;
         }
@@ -53,6 +56,7 @@ namespace ProjectManagement.Domain.Concrete
             if (task == null) return false;
 
             dbContext.Tasks.AddOrUpdate(task);
+            dbContext.SaveChanges();
             return true;
         }
 

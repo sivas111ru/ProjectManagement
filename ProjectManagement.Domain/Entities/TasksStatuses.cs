@@ -6,10 +6,10 @@ namespace ProjectManagement.Domain.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TasksStatus
+    public partial class TasksStatuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TasksStatus()
+        public TasksStatuses()
         {
             Tasks = new HashSet<Task>();
         }

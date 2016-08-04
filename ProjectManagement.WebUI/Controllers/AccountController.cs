@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AutoMapper;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Infrastructure.Abstract;
@@ -54,18 +55,12 @@ namespace ProjectManagement.WebUI.Controllers
         {
             var userEmail = User.Identity.Name;
 
-            var user = userRepository.GetUserByEmail(userEmail);
+            User user = userRepository.GetUserByEmail(userEmail);
 
             if (user == null)
                 return View();
 
-            UserPageViewModel model = new UserPageViewModel
-            {
-                Id = user.id,
-                Email = user.email,
-                Name = user.name,
-                IsNotification = user.notification
-            };
+            UserPageViewModel model = Mapper.Map<UserPageViewModel>(user);
 
             return View(model);
         }
@@ -75,9 +70,7 @@ namespace ProjectManagement.WebUI.Controllers
         {
             var u = userRepository.GetUserById(user.Id);
 
-            u.name = user.Name;
-            u.email = user.Email;
-            u.notification = user.IsNotification;
+            Mapper.Map<UserPageViewModel, User>(user, u);
 
             userRepository.UpdateUser(u);
 

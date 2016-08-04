@@ -31,12 +31,12 @@ namespace ProjectManagement.Domain.Concrete
 
         public List<Project> GetLastNProjects(int projectNumber)
         {
-            return (Projects.OrderByDescending(d => d.createDate).Take(projectNumber)).ToList();
+            return (Projects.OrderByDescending(d => d.createDate).Where(p=>p.active).Take(projectNumber)).ToList();
         }
 
         public List<Project> GetProjects()
         {
-            return dbContext.Projects.ToList();
+            return dbContext.Projects.Where(p=>p.active).ToList();
         }
 
         public Project GetProjectById(int projectId)

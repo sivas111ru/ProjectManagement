@@ -187,6 +187,7 @@
     <Compile Include="Infrastructure\Concrete\PMRoleProvider.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ProjectCreateViewModel.cs" />
     <Compile Include="Models\ProjectUsersEditViewModel.cs" />
     <Compile Include="Models\ProjectPageViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel.cs" />
@@ -243,6 +244,8 @@
     <Content Include="Views\Account\UserPage.cshtml" />
     <Content Include="Views\Task\EditTask.cshtml" />
     <Content Include="Views\Project\ProjectUsersEdit.cshtml" />
+    <Content Include="Views\Project\ProjectCreate.cshtml" />
+    <Content Include="Views\Project\ProjectsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

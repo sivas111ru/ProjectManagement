@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Castle.Components.DictionaryAdapter;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Entities;
@@ -13,18 +14,20 @@ namespace ProjectManagement.WebUI.Controllers
     [Authorize]
     public class ProjectController : Controller
     {
-        private IProjectRepository repository;
+        private IProjectRepository ProjectRepository;
+        private IUserRepository UserRepository;
 
-        public ProjectController(IProjectRepository data)
+        public ProjectController(IProjectRepository data, IUserRepository udata)
         {
-            repository = data;
+            ProjectRepository = data;
+            UserRepository = udata;
         }
 
 
         public ViewResult ProjectPage(int id)
         {
-            var project = repository.GetProjectById(id);
-            var usersInvolved = repository.GetAllUsersByProjectId(id);
+            var project = ProjectRepository.GetProjectById(id);
+            var usersInvolved = ProjectRepository.GetAllUsersByProjectId(id);
 
             return View(new ProjectPageViewModel() {
                 UsersInvolved = usersInvolved,
@@ -34,7 +37,7 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ProjectUsersEdit(int id)
         {
-            return View((from map in repository.UserProjectMaps where map.accessLvl > 0 && map.fkProject == id && map.active
+            return View((from map in ProjectRepository.UserProjectMaps where map.accessLvl > 0 && map.fkProject == id && map.active
                          select new ProjectUsersEditViewModel
                          {
                              UserId = map.fkUser,
@@ -48,9 +51,43 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ActionResult DeleteUserFromProject(int userId, int prjId)
         {
-            repository.DeleteUserFromProject(userId,prjId);
+            ProjectRepository.DeleteUserFromProject(userId,prjId);
 
             return RedirectToAction("ProjectUsersEdit", new { id = prjId });
+        }
+
+
+        public ViewResult ProjectCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProjectCreate(Project model)
+        {
+            model.active = true;
+            model.fkInitiator = UserRepository.GetUserByEmail(User.Identity.Name).id; // OMG
+            model.createDate = DateTime.Now;
+            ProjectRepository.CreateProject(model);
+
+            return RedirectToAction("ProjectsView");
+        }
+
+
+        public ViewResult ProjectsView()
+        {
+            var projects = ProjectRepository.GetProjects();
+
+            var model = Mapper.Map<List<Project>, List<ProjectsViewModel>>(projects);
+
+            return View(model);
+        }
+
+        public ActionResult DeleteProject(int prjId)
+        {
+            ProjectRepository.DeleteProject(prjId);
+
+            return RedirectToAction("ProjectsView");
         }
     }
 }

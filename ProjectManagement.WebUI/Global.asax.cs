@@ -40,6 +40,7 @@ namespace ProjectManagement.WebUI
 
                 cfg.CreateMap<Task, TaskViewModel>();
                 cfg.CreateMap<TaskViewModel, Task>();
+                cfg.CreateMap<ProjectCreateViewModel, Project>();
             });
         }
     }

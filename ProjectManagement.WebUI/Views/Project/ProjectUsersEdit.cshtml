@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.ProjectName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccessLvl)
+            @Html.Label(item.AccessLvl.Equals("1") ? "ReadOnly" : "Full access")
         </td>
         <td>
             @Html.ActionLink("Delete", "DeleteUserFromProject", new { userId = item.UserId, prjId = item.ProjectId })

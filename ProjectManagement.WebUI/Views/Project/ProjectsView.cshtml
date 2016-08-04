@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjectManagement.WebUI.Models.ProjectsViewModel>
+
+@{
+    ViewBag.Title = "ProjectsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Projects View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ProjectCreate")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Initiator)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.ActionLink(item.name, "ProjectPage", new { id = item.id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Initiator)
+            </td>
+            <td>
+                @Html.ActionLink("EditUsers", "ProjectUsersEdit", new { id = item.id }) |
+                @Html.ActionLink("Delete", "DeleteProject", new { prjId = item.id })
+            </td>
+        </tr>
+    }
+</table>

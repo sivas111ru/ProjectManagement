@@ -30,16 +30,10 @@ namespace ProjectManagement.WebUI.Controllers
             if (task == null)
                 return RedirectToAction("ViewProjects", "Home");
 
-            var statuses = taskRepository.TasksStatuses.Select(ts => new SelectListItem
-            {
-                Text = ts.name,
-                Value = ts.id.ToString()
-            }).ToList();
-
             var model = Mapper.Map<TaskViewModel>(task);
-            model.StatusAll = statuses;
             model.UsersToTask = taskRepository.GetUsersAssignedToTask(id);
-
+            model.StatusAll = Mapper.Map<List<TasksStatus>, List<SelectListItem>>(taskRepository.GetAllTasksStatuses());
+            model.PriorityAll = Mapper.Map<List<TasksPriority>, List<SelectListItem>>(taskRepository.GetAllTaskPriorities());
 
             return View(model);
         }

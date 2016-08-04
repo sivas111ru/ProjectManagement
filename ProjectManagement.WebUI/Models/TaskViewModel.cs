@@ -20,5 +20,6 @@ namespace ProjectManagement.WebUI.Models
         public DateTime? EndDate { get; set; }
 
         public List<SelectListItem> StatusAll { get; set; }
+        public List<SelectListItem> PriorityAll { get; set; }
     }
 }

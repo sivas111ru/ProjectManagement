@@ -28,7 +28,10 @@ namespace ProjectManagement.Domain.Abstract
         //TaskStatuses
         List<TasksStatus> GetAllTasksStatuses();
 
-        //TaskHistoryTypes
+        //TaskPriorities
+        List<TasksPriority> GetAllTaskPriorities();
+
+            //TaskHistoryTypes
         TasksHistoryType GeHistoryTypeById(int id);
 
         //UsersTasksMap

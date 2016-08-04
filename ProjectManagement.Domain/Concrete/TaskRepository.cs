@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Entities;
 using Task = ProjectManagement.Domain.Entities.Task;
@@ -13,9 +12,9 @@ namespace ProjectManagement.Domain.Concrete
     public class TaskRepository: BaseRepository, ITaskRepository
     {
         public IQueryable<Task> Tasks => dbContext.Tasks.AsQueryable();
-        public IQueryable<TaskHistory> TasksHistory => dbContext.TasksHistory.AsQueryable();
+        public IQueryable<TasksHistory> TasksHistory => dbContext.TasksHistories.AsQueryable();
         public IQueryable<TasksHistoryType> TasksHistoryTypes => dbContext.TasksHistoryTypes.AsQueryable();
-        public IQueryable<TasksStatuses> TasksStatuses => dbContext.TasksStatuses.AsQueryable();
+        public IQueryable<TasksStatus> TasksStatuses => dbContext.TasksStatuses.AsQueryable();
 
         public Task GetTaskById(int id)
         {
@@ -79,7 +78,7 @@ namespace ProjectManagement.Domain.Concrete
         {
             try
             {
-                dbContext.UsersTasksMap.AddOrUpdate(new UserTaskMap
+                dbContext.UsersTasksMaps.AddOrUpdate(new UsersTasksMap
                 {
                     active = true,
                     fkUser = usrId,
@@ -100,21 +99,21 @@ namespace ProjectManagement.Domain.Concrete
         public List<Task> GetAllTaskByUserId(int id)
         {
             return
-                dbContext.UsersTasksMap.Where(m => m.fkUser == id)
+                dbContext.UsersTasksMaps.Where(m => m.fkUser == id)
                     .Join(Tasks, map => map.fkTask, t => t.id, (map, t) => t)
                     .ToList();
         }
 
         public List<int> GetUsersIdbyTaskId(int id)
         {
-            return dbContext.UsersTasksMap.Where(m => m.fkTask == id).Select(i => i.fkUser).ToList();
+            return dbContext.UsersTasksMaps.Where(m => m.fkTask == id).Select(i => i.fkUser).ToList();
         }
 
         public bool WriteHistory(int taskId, int userId, int statId, string msg)
         {
             try
             {
-                var result = new TaskHistory
+                var result = new TasksHistory
                 {
                     fkTask = taskId,
                     fkUser = userId,
@@ -123,7 +122,7 @@ namespace ProjectManagement.Domain.Concrete
                     dateTime = DateTime.Now
                 };
 
-                dbContext.TasksHistory.AddOrUpdate(result);
+                dbContext.TasksHistories.AddOrUpdate(result);
                 dbContext.SaveChanges();
 
                 return true;
@@ -136,12 +135,12 @@ namespace ProjectManagement.Domain.Concrete
            
         }
 
-        public List<TaskHistory> GeTaskHistoryByTask(int id)
+        public List<TasksHistory> GeTaskHistoryByTask(int id)
         {
             return TasksHistory.Where(t => t.fkTask.Equals(id)).ToList();
         }
 
-        public List<TasksStatuses> GetAllTasksStatuses()
+        public List<TasksStatus> GetAllTasksStatuses()
         {
             return TasksStatuses.Select(a => a).ToList();
         }
@@ -154,7 +153,7 @@ namespace ProjectManagement.Domain.Concrete
         public List<User> GetUsersAssignedToTask(int taskId)
         {
             return
-                dbContext.UsersTasksMap.Where(m => m.fkTask == taskId)
+                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId)
                     .Join(dbContext.Users, map => map.fkUser, u => u.id, (map, u) => u)
                     .ToList();
         }

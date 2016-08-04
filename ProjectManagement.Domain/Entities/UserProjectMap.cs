@@ -12,18 +12,14 @@ namespace ProjectManagement.Domain.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TasksHistoryType
+    public partial class UserProjectMap
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TasksHistoryType()
-        {
-            this.TasksHistories = new HashSet<TasksHistory>();
-        }
-    
         public int id { get; set; }
-        public string name { get; set; }
+        public bool active { get; set; }
+        public int fkUser { get; set; }
+        public int fkProject { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TasksHistory> TasksHistories { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual User User { get; set; }
     }
 }

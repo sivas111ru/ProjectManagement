@@ -38,7 +38,7 @@ namespace ProjectManagement.WebUI.Controllers
             return View(repository.GetLastNProjects(5).Select(p => new ProjectsViewModel
             {
                 id = p.id,
-                Initiator = p.Users.name,
+                Initiator = p.User.name,
                 name = p.name,
                 createDate = p.createDate
             }));

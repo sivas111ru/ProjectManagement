@@ -60,7 +60,7 @@ namespace ProjectManagement.WebUI.Controllers
                 task.name = model.Name;
                 task.description = model.Description;
                 task.status = model.Status;
-                task.priority = model.Priority;
+                task.fkPriority = model.Priority;
                 task.startDate = model.StartDate;
                 task.endDate = model.EndDate;
 

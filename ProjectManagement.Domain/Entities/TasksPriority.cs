@@ -12,18 +12,19 @@ namespace ProjectManagement.Domain.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TasksHistoryType
+    public partial class TasksPriority
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TasksHistoryType()
+        public TasksPriority()
         {
-            this.TasksHistories = new HashSet<TasksHistory>();
+            this.Tasks = new HashSet<Task>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
+        public string color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TasksHistory> TasksHistories { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }

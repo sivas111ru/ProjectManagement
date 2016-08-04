@@ -9,9 +9,9 @@ namespace ProjectManagement.Domain.Abstract
     public interface ITaskRepository
     {
         IQueryable<Task> Tasks { get; }
-        IQueryable<TaskHistory> TasksHistory { get; }
+        IQueryable<TasksHistory> TasksHistory { get; }
         IQueryable<TasksHistoryType> TasksHistoryTypes { get; }
-        IQueryable<TasksStatuses> TasksStatuses { get; }
+        IQueryable<TasksStatus> TasksStatuses { get; }
 
         // Task
         Task GetTaskById(int id);
@@ -23,10 +23,10 @@ namespace ProjectManagement.Domain.Abstract
 
         //TaskHistory
         bool WriteHistory(int taskId, int userId, int statusTypeId, string msg);
-        List<TaskHistory> GeTaskHistoryByTask(int id);
+        List<TasksHistory> GeTaskHistoryByTask(int id);
 
         //TaskStatuses
-        List<TasksStatuses> GetAllTasksStatuses();
+        List<TasksStatus> GetAllTasksStatuses();
 
         //TaskHistoryTypes
         TasksHistoryType GeHistoryTypeById(int id);

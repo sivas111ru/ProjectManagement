@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProjectManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Logs">
           <Key>
             <PropertyRef Name="id" />
@@ -83,6 +83,7 @@
           <Property Name="active" Type="bit" Nullable="false" />
           <Property Name="fkUser" Type="int" Nullable="false" />
           <Property Name="fkProject" Type="int" Nullable="false" />
+          <Property Name="accessLvl" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -309,8 +310,7 @@
             <End Role="UsersTasksMap" EntitySet="UsersTasksMap" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -409,6 +409,7 @@
           <Property Name="fkProject" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="Self.FK_UserProjectMap_Projects" FromRole="UserProjectMap" ToRole="Projects" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserProjectMap_Users" FromRole="UserProjectMap" ToRole="Users" />
+          <Property Name="accessLvl" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -728,6 +729,7 @@
           <EntitySetMapping Name="UserProjectMaps">
             <EntityTypeMapping TypeName="ProjectManagementModel.UserProjectMap">
               <MappingFragment StoreEntitySet="UserProjectMap">
+                <ScalarProperty Name="accessLvl" ColumnName="accessLvl" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="fkUser" ColumnName="fkUser" />

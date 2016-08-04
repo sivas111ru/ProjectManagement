@@ -31,5 +31,17 @@ namespace ProjectManagement.WebUI.Controllers
                 Description = project.description}
             );
         }
+
+        public ViewResult ProjectUsersEdit(int id)
+        {
+            return View((from map in repository.UserProjectMaps where map.accessLvl > 0 && map.fkProject == id
+                         select new ProjectUsersEditViewModel
+                         {
+                             Id = map.id,
+                             UserName = map.User.name,
+                             ProjectName = map.Project.name,
+                             AccessLvl = map.accessLvl.ToString()
+                         }));
+        }
     }
 }

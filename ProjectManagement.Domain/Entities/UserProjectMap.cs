@@ -18,6 +18,7 @@ namespace ProjectManagement.Domain.Entities
         public bool active { get; set; }
         public int fkUser { get; set; }
         public int fkProject { get; set; }
+        public int accessLvl { get; set; }
     
         public virtual Project Project { get; set; }
         public virtual User User { get; set; }

@@ -8,6 +8,9 @@ namespace ProjectManagement.Domain.Abstract
     public interface IProjectRepository
     {
         IQueryable<Project> Projects { get; }
+        IQueryable<UserProjectMap> UserProjectMaps { get; }
+
+        string GetName(int id);
 
         bool CreateProject(Project project);
 
@@ -22,5 +25,9 @@ namespace ProjectManagement.Domain.Abstract
         bool DeleteProject(int projectId);
 
         List<User> GetAllUsersByProjectId(int id);
+
+        bool AddUserToProject(int usrId, int prjId, int accessLvl);
+
+        bool DeleteUserFromProject(int userId, int prjId);
     }
 }

@@ -14,6 +14,13 @@ namespace ProjectManagement.Domain.Concrete
     public class ProjectRepository: BaseRepository, IProjectRepository
     {
         public IQueryable<Project> Projects => dbContext.Projects.AsQueryable();
+        public IQueryable<UserProjectMap> UserProjectMaps => dbContext.UserProjectMaps.AsQueryable();
+
+        public string GetName(int id)
+        {
+            return Projects.FirstOrDefault(p => p.id == id)?.name;
+        }
+            
 
         public bool CreateProject(Project project)
         {
@@ -61,10 +68,60 @@ namespace ProjectManagement.Domain.Concrete
 
         public List<User> GetAllUsersByProjectId(int id)
         {
-            return (from task in dbContext.Tasks where task.fkProject == id
-                join map in dbContext.UsersTasksMaps on task.id equals map.fkTask
+            return (from map in dbContext.UserProjectMaps
+                where map.active && map.accessLvl > 0 && map.fkUser == id
                 join u in dbContext.Users on map.fkUser equals u.id
                 select u).ToList();
         }
+
+
+        public bool AddUserToProject(int usrId, int prjId, int accessLvl)
+        {
+            try
+            {
+                UserProjectMap upm = new UserProjectMap
+                {
+                    active = true,
+                    fkProject = prjId,
+                    fkUser = usrId,
+                    accessLvl = accessLvl
+                };
+
+                dbContext.UserProjectMaps.AddOrUpdate(upm);
+                dbContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+             
+        }
+
+
+        public bool DeleteUserFromProject(int userId, int prjId)
+        {
+            try
+            {
+                UserProjectMap upm = dbContext.UserProjectMaps.FirstOrDefault(u => u.fkUser.Equals(userId) && u.fkProject.Equals(prjId));
+
+                if (upm == null) return false;
+
+                upm.active = false;
+
+                dbContext.UserProjectMaps.AddOrUpdate(upm);
+
+                dbContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
     }
 }

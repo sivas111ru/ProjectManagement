@@ -1,7 +1,8 @@
-﻿@using ProjectManagement.WebUI.Helpers
+﻿@using System.Web.Mvc
+@using ProjectManagement.WebUI.Helpers
 
-@helper ClassedDropDownList (string index, IEnumerable<ClassedSelectListItem> list ) {
-    <select class="form-control">
+@helper ClassedDropDownList (string name, string index, IEnumerable<ClassedSelectListItem> list ) {
+    <select class="form-control" name="@(name)" id="@(name)">
         @foreach (var item in list)
         {
             item.Selected = item.Value.Equals(index);

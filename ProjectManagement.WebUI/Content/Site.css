@@ -33,7 +33,12 @@
 /* PRIORITIES */
 
 .priority-low { background: #F2FAFF;}
-.priority-normal { background: none;}
+.priority-normal { background: white;}
 .priority-high { background: #FFF2F2;}
 .priority-urgent { background: #FFD4D4;}
 .priority-immediate { background: #FFD4D4; font-weight: bold}
+
+select option {
+    background: white;
+    font-weight: normal;
+}

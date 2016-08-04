@@ -38,8 +38,7 @@
 
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label" })
-            @CustomHelper.ClassedDropDownList(Model.Priority.ToString(), Model.PriorityAll)
-            @Html.DropDownListFor(model => model.Priority, Model.PriorityAll, htmlAttributes: new { @class = "form-control" })
+            @CustomHelper.ClassedDropDownList("Priority", Model.Priority.ToString(), Model.PriorityAll)
         </div>
     </div>
 
@@ -66,3 +65,7 @@
     @Html.ActionLink("Cancel and return to List", "ViewProjects", "Home")
 }
 
+@section scripts {
+    
+    <script src="~/Scripts/Task/EditTask.js"></script>
+}

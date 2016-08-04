@@ -15,6 +15,7 @@ namespace ProjectManagement.Domain.Concrete
         public IQueryable<TasksHistory> TasksHistory => dbContext.TasksHistories.AsQueryable();
         public IQueryable<TasksHistoryType> TasksHistoryTypes => dbContext.TasksHistoryTypes.AsQueryable();
         public IQueryable<TasksStatus> TasksStatuses => dbContext.TasksStatuses.AsQueryable();
+        public IQueryable<TasksPriority> TaskPriorities => dbContext.TasksPriorities.AsQueryable();
 
         public Task GetTaskById(int id)
         {
@@ -143,6 +144,11 @@ namespace ProjectManagement.Domain.Concrete
         public List<TasksStatus> GetAllTasksStatuses()
         {
             return TasksStatuses.Select(a => a).ToList();
+        }
+
+        public List<TasksPriority> GetAllTaskPriorities()
+        {
+            return TaskPriorities.ToList();
         }
 
         public TasksHistoryType GeHistoryTypeById(int id)

@@ -1,5 +1,7 @@
 ﻿@model ProjectManagement.WebUI.Models.TaskViewModel
 
+@using ProjectManagement.WebUI.Helpers
+
 @{
     ViewBag.Title = "EditTask";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,7 +38,7 @@
 
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+            @CustomHelper.ClassedDropDownList("Priority", Model.Priority.ToString(), Model.PriorityAll)
         </div>
     </div>
 
@@ -63,3 +65,7 @@
     @Html.ActionLink("Cancel and return to List", "ViewProjects", "Home")
 }
 
+@section scripts {
+    
+    <script src="~/Scripts/Task/EditTask.js"></script>
+}

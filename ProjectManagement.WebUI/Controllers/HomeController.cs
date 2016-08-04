@@ -14,13 +14,10 @@ namespace ProjectManagement.WebUI.Controllers
     public class HomeController : Controller
     {
         private IProjectRepository repository;
-        private IUserRepository userRepository;
 
-        public HomeController(IProjectRepository data, IUserRepository userRepo)
+        public HomeController(IProjectRepository data)
         {
             repository = data;
-
-            userRepository = userRepo;
         }
 
         public ViewResult ViewProjects()

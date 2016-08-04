@@ -32,7 +32,7 @@ namespace ProjectManagement.WebUI.Infrastructure
         private void AddBindings()
         {
             // configure container
-            ninjectKernel.Bind<IDataRepository>().To<EFDataRepository>();
+            ninjectKernel.Bind<IDataRepository>().To<DataRepository>();
             ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
             ninjectKernel.Bind<IProjectRepository>().To<ProjectRepository>();
             ninjectKernel.Bind<ITaskRepository>().To<TaskRepository>();

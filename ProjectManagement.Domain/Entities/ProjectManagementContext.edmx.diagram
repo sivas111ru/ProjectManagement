@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c7c33f79c9004b838d31914c62349d83" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectManagementModel.Log" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Project" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Task" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TasksHistory" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TasksHistoryType" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TasksPriority" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TasksStatus" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.UserProjectMap" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.User" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementModel.UsersTasksMap" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Logs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Projects_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Tasks_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_UserProjectMap_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Tasks_TasksPriority" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_Tasks_TasksStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TasksHistory_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_UsersTasksMap_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TasksHistory_TasksHistoryTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TasksHistory_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_UserProjectMap_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectManagementModel.FK_UsersTasksMap_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

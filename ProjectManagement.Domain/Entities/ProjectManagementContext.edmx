@@ -1,0 +1,784 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkUser" Type="int" Nullable="false" />
+          <Property Name="dateTime" Type="datetime" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+          <Property Name="fkInitiator" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkProject" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="fkPriority" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="startDate" Type="datetime" Nullable="false" />
+          <Property Name="endDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TasksHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkTask" Type="int" Nullable="false" />
+          <Property Name="fkUser" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="fkTaskHistoryTypes" Type="int" Nullable="false" />
+          <Property Name="dateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TasksHistoryTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TasksPriority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TasksStatuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProjectMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="fkUser" Type="int" Nullable="false" />
+          <Property Name="fkProject" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="notification" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersTasksMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkUser" Type="int" Nullable="false" />
+          <Property Name="fkTask" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Logs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="fkInitiator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="fkProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TasksPriority">
+          <End Role="TasksPriority" Type="Self.TasksPriority" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="fkPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TasksStatuses">
+          <End Role="TasksStatuses" Type="Self.TasksStatuses" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksStatuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_TasksHistoryTypes">
+          <End Role="TasksHistoryTypes" Type="Self.TasksHistoryTypes" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksHistoryTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkTaskHistoryTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjectMap_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="UserProjectMap" Type="Self.UserProjectMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProjectMap">
+              <PropertyRef Name="fkProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjectMap_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserProjectMap" Type="Self.UserProjectMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProjectMap">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTasksMap_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="UsersTasksMap" Type="Self.UsersTasksMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersTasksMap">
+              <PropertyRef Name="fkTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTasksMap_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersTasksMap" Type="Self.UsersTasksMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersTasksMap">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectManagementModelStoreContainer">
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasksHistory" EntityType="Self.TasksHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasksHistoryTypes" EntityType="Self.TasksHistoryTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasksPriority" EntityType="Self.TasksPriority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasksStatuses" EntityType="Self.TasksStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProjectMap" EntityType="Self.UserProjectMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersTasksMap" EntityType="Self.UsersTasksMap" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users" Association="Self.FK_Projects_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="Self.FK_Tasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TasksPriority" Association="Self.FK_Tasks_TasksPriority">
+            <End Role="TasksPriority" EntitySet="TasksPriority" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TasksStatuses" Association="Self.FK_Tasks_TasksStatuses">
+            <End Role="TasksStatuses" EntitySet="TasksStatuses" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_Tasks" Association="Self.FK_TasksHistory_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TasksHistory" EntitySet="TasksHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_TasksHistoryTypes" Association="Self.FK_TasksHistory_TasksHistoryTypes">
+            <End Role="TasksHistoryTypes" EntitySet="TasksHistoryTypes" />
+            <End Role="TasksHistory" EntitySet="TasksHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_Users" Association="Self.FK_TasksHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TasksHistory" EntitySet="TasksHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjectMap_Projects" Association="Self.FK_UserProjectMap_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="UserProjectMap" EntitySet="UserProjectMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjectMap_Users" Association="Self.FK_UserProjectMap_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProjectMap" EntitySet="UserProjectMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTasksMap_Tasks" Association="Self.FK_UsersTasksMap_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="UsersTasksMap" EntitySet="UsersTasksMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTasksMap_Users" Association="Self.FK_UsersTasksMap_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersTasksMap" EntitySet="UsersTasksMap" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkUser" Type="Int32" Nullable="false" />
+          <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fkInitiator" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Projects_Users" FromRole="Projects" ToRole="Users" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_Projects" FromRole="Projects" ToRole="Tasks" />
+          <NavigationProperty Name="UserProjectMaps" Relationship="Self.FK_UserProjectMap_Projects" FromRole="Projects" ToRole="UserProjectMap" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkProject" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fkPriority" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Tasks_Projects" FromRole="Tasks" ToRole="Projects" />
+          <NavigationProperty Name="TasksPriority" Relationship="Self.FK_Tasks_TasksPriority" FromRole="Tasks" ToRole="TasksPriority" />
+          <NavigationProperty Name="TasksStatus" Relationship="Self.FK_Tasks_TasksStatuses" FromRole="Tasks" ToRole="TasksStatuses" />
+          <NavigationProperty Name="TasksHistories" Relationship="Self.FK_TasksHistory_Tasks" FromRole="Tasks" ToRole="TasksHistory" />
+          <NavigationProperty Name="UsersTasksMaps" Relationship="Self.FK_UsersTasksMap_Tasks" FromRole="Tasks" ToRole="UsersTasksMap" />
+        </EntityType>
+        <EntityType Name="TasksHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkTask" Type="Int32" Nullable="false" />
+          <Property Name="fkUser" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fkTaskHistoryTypes" Type="Int32" Nullable="false" />
+          <Property Name="dateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_TasksHistory_Tasks" FromRole="TasksHistory" ToRole="Tasks" />
+          <NavigationProperty Name="TasksHistoryType" Relationship="Self.FK_TasksHistory_TasksHistoryTypes" FromRole="TasksHistory" ToRole="TasksHistoryTypes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TasksHistory_Users" FromRole="TasksHistory" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TasksHistoryType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TasksHistories" Relationship="Self.FK_TasksHistory_TasksHistoryTypes" FromRole="TasksHistoryTypes" ToRole="TasksHistory" />
+        </EntityType>
+        <EntityType Name="TasksPriority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TasksPriority" FromRole="TasksPriority" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="TasksStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TasksStatuses" FromRole="TasksStatuses" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="UserProjectMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="fkUser" Type="Int32" Nullable="false" />
+          <Property Name="fkProject" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_UserProjectMap_Projects" FromRole="UserProjectMap" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserProjectMap_Users" FromRole="UserProjectMap" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="notification" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Logs" Relationship="Self.FK_Logs_Users" FromRole="Users" ToRole="Logs" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Users" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="TasksHistories" Relationship="Self.FK_TasksHistory_Users" FromRole="Users" ToRole="TasksHistory" />
+          <NavigationProperty Name="UserProjectMaps" Relationship="Self.FK_UserProjectMap_Users" FromRole="Users" ToRole="UserProjectMap" />
+          <NavigationProperty Name="UsersTasksMaps" Relationship="Self.FK_UsersTasksMap_Users" FromRole="Users" ToRole="UsersTasksMap" />
+        </EntityType>
+        <EntityType Name="UsersTasksMap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkUser" Type="Int32" Nullable="false" />
+          <Property Name="fkTask" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_UsersTasksMap_Tasks" FromRole="UsersTasksMap" ToRole="Tasks" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UsersTasksMap_Users" FromRole="UsersTasksMap" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Logs_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Logs" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="fkInitiator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="fkProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjectMap_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="UserProjectMap" Type="Self.UserProjectMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProjectMap">
+              <PropertyRef Name="fkProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TasksPriority">
+          <End Role="TasksPriority" Type="Self.TasksPriority" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="fkPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TasksStatuses">
+          <End Role="TasksStatuses" Type="Self.TasksStatus" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksStatuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTasksMap_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="UsersTasksMap" Type="Self.UsersTasksMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersTasksMap">
+              <PropertyRef Name="fkTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_TasksHistoryTypes">
+          <End Role="TasksHistoryTypes" Type="Self.TasksHistoryType" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TasksHistoryTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkTaskHistoryTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksHistory_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="TasksHistory" Type="Self.TasksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TasksHistory">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProjectMap_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProjectMap" Type="Self.UserProjectMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProjectMap">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersTasksMap_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UsersTasksMap" Type="Self.UsersTasksMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersTasksMap">
+              <PropertyRef Name="fkUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="TasksHistories" EntityType="Self.TasksHistory" />
+          <EntitySet Name="TasksHistoryTypes" EntityType="Self.TasksHistoryType" />
+          <EntitySet Name="TasksPriorities" EntityType="Self.TasksPriority" />
+          <EntitySet Name="TasksStatuses" EntityType="Self.TasksStatus" />
+          <EntitySet Name="UserProjectMaps" EntityType="Self.UserProjectMap" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UsersTasksMaps" EntityType="Self.UsersTasksMap" />
+          <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Users" Association="Self.FK_Projects_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="Self.FK_Tasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjectMap_Projects" Association="Self.FK_UserProjectMap_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="UserProjectMap" EntitySet="UserProjectMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TasksPriority" Association="Self.FK_Tasks_TasksPriority">
+            <End Role="TasksPriority" EntitySet="TasksPriorities" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TasksStatuses" Association="Self.FK_Tasks_TasksStatuses">
+            <End Role="TasksStatuses" EntitySet="TasksStatuses" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_Tasks" Association="Self.FK_TasksHistory_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TasksHistory" EntitySet="TasksHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTasksMap_Tasks" Association="Self.FK_UsersTasksMap_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="UsersTasksMap" EntitySet="UsersTasksMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_TasksHistoryTypes" Association="Self.FK_TasksHistory_TasksHistoryTypes">
+            <End Role="TasksHistoryTypes" EntitySet="TasksHistoryTypes" />
+            <End Role="TasksHistory" EntitySet="TasksHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksHistory_Users" Association="Self.FK_TasksHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TasksHistory" EntitySet="TasksHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProjectMap_Users" Association="Self.FK_UserProjectMap_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProjectMap" EntitySet="UserProjectMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersTasksMap_Users" Association="Self.FK_UsersTasksMap_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersTasksMap" EntitySet="UsersTasksMaps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectManagementModelStoreContainer" CdmEntityContainer="ProjectManagementEntities">
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fkUser" ColumnName="fkUser" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ProjectManagementModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="fkInitiator" ColumnName="fkInitiator" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ProjectManagementModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fkProject" ColumnName="fkProject" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="fkPriority" ColumnName="fkPriority" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasksHistories">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TasksHistory">
+              <MappingFragment StoreEntitySet="TasksHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fkTask" ColumnName="fkTask" />
+                <ScalarProperty Name="fkUser" ColumnName="fkUser" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="fkTaskHistoryTypes" ColumnName="fkTaskHistoryTypes" />
+                <ScalarProperty Name="dateTime" ColumnName="dateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasksHistoryTypes">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TasksHistoryType">
+              <MappingFragment StoreEntitySet="TasksHistoryTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasksPriorities">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TasksPriority">
+              <MappingFragment StoreEntitySet="TasksPriority">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="color" ColumnName="color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasksStatuses">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TasksStatus">
+              <MappingFragment StoreEntitySet="TasksStatuses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProjectMaps">
+            <EntityTypeMapping TypeName="ProjectManagementModel.UserProjectMap">
+              <MappingFragment StoreEntitySet="UserProjectMap">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="fkUser" ColumnName="fkUser" />
+                <ScalarProperty Name="fkProject" ColumnName="fkProject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ProjectManagementModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="notification" ColumnName="notification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersTasksMaps">
+            <EntityTypeMapping TypeName="ProjectManagementModel.UsersTasksMap">
+              <MappingFragment StoreEntitySet="UsersTasksMap">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fkUser" ColumnName="fkUser" />
+                <ScalarProperty Name="fkTask" ColumnName="fkTask" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -58,5 +58,13 @@ namespace ProjectManagement.Domain.Concrete
 
             return true;
         }
+
+        public List<User> GetAllUsersByProjectId(int id)
+        {
+            return (from task in dbContext.Tasks where task.fkProject == id
+                join map in dbContext.UsersTasksMaps on task.id equals map.fkTask
+                join u in dbContext.Users on map.fkUser equals u.id
+                select u).ToList();
+        }
     }
 }

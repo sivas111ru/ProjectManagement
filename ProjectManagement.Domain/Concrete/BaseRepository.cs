@@ -9,12 +9,12 @@ namespace ProjectManagement.Domain.Concrete
 {
     public abstract class BaseRepository
     {
-        private ProjectManagementContext _dbContext; 
-        protected ProjectManagementContext dbContext
+        private ProjectManagementEntities _dbContext; 
+        protected ProjectManagementEntities dbContext
         {
             get
             {
-                if (_dbContext == null) _dbContext = new ProjectManagementContext();
+                if (_dbContext == null) _dbContext = new ProjectManagementEntities();
                 return _dbContext;
             }
         }

@@ -20,5 +20,7 @@ namespace ProjectManagement.Domain.Abstract
         bool EditProject(Project project);
 
         bool DeleteProject(int projectId);
+
+        List<User> GetAllUsersByProjectId(int id);
     }
 }

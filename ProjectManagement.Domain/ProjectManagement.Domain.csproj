@@ -57,27 +57,83 @@
     <Compile Include="Abstract\ITaskRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\BaseRepository.cs" />
-    <Compile Include="Concrete\EFDataRepository.cs" />
+    <Compile Include="Concrete\DataRepository.cs" />
     <Compile Include="Concrete\ProjectRepository.cs" />
     <Compile Include="Concrete\TaskRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
-    <Compile Include="Entities\Log.cs" />
-    <Compile Include="Entities\ProjectManagementContext.cs" />
-    <Compile Include="Entities\Project.cs" />
-    <Compile Include="Entities\sysdiagrams.cs" />
-    <Compile Include="Entities\Task.cs" />
-    <Compile Include="Entities\TaskHistory.cs" />
-    <Compile Include="Entities\TasksHistoryType.cs" />
-    <Compile Include="Entities\TasksStatuses.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserTaskMap.cs" />
+    <Compile Include="Entities\Log.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Project.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ProjectManagementContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ProjectManagementContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ProjectManagementContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagementContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Task.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TasksHistory.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TasksHistoryType.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TasksPriority.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TasksStatus.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\UserProjectMap.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\UsersTasksMap.cs">
+      <DependentUpon>ProjectManagementContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Entities\ProjectManagementContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProjectManagementContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entities\ProjectManagementContext.edmx.diagram">
+      <DependentUpon>ProjectManagementContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Entities\ProjectManagementContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagementContext.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagementContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\ProjectManagementContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagementContext.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagementContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

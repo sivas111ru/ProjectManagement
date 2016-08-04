@@ -23,8 +23,13 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ProjectPage(int id)
         {
-            return View(new ProjectPageViewModel() { UsersInvolved = repository.GetAllUsersByProjectId(id),
-                                                     Description = repository.Projects.Where(i => i.id == id).Select(d => d.description).FirstOrDefault() });
+            var project = repository.GetProjectById(id);
+            var usersInvolved = repository.GetAllUsersByProjectId(id);
+
+            return View(new ProjectPageViewModel() {
+                UsersInvolved = usersInvolved,
+                Description = project.description}
+            );
         }
     }
 }

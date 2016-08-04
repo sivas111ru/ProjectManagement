@@ -34,14 +34,23 @@ namespace ProjectManagement.WebUI.Controllers
 
         public ViewResult ProjectUsersEdit(int id)
         {
-            return View((from map in repository.UserProjectMaps where map.accessLvl > 0 && map.fkProject == id
+            return View((from map in repository.UserProjectMaps where map.accessLvl > 0 && map.fkProject == id && map.active
                          select new ProjectUsersEditViewModel
                          {
-                             Id = map.id,
+                             UserId = map.fkUser,
+                             ProjectId = map.fkProject,
                              UserName = map.User.name,
                              ProjectName = map.Project.name,
                              AccessLvl = map.accessLvl.ToString()
                          }));
+        }
+
+
+        public ActionResult DeleteUserFromProject(int userId, int prjId)
+        {
+            repository.DeleteUserFromProject(userId,prjId);
+
+            return RedirectToAction("ProjectUsersEdit", new { id = prjId });
         }
     }
 }

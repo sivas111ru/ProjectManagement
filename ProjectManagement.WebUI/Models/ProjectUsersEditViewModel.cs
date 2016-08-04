@@ -11,7 +11,9 @@ namespace ProjectManagement.WebUI.Models
     public class ProjectUsersEditViewModel
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public int UserId { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int ProjectId { get; set; }
 
         public string UserName { get; set; }
 

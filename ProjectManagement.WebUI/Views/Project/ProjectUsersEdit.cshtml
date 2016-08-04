@@ -36,7 +36,7 @@
             @Html.DisplayFor(modelItem => item.AccessLvl)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "DeleteUserFromProject", new { userId = item.UserId, prjId = item.ProjectId })
         </td>
     </tr>
 }

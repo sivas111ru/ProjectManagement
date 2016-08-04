@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Concrete;
 using ProjectManagement.Domain.Entities;
@@ -35,19 +36,12 @@ namespace ProjectManagement.WebUI.Controllers
                 Value = ts.id.ToString()
             }).ToList();
 
+            var model = Mapper.Map<TaskViewModel>(task);
+            model.StatusAll = statuses;
+            model.UsersToTask = taskRepository.GetUsersAssignedToTask(id);
 
 
-            return View(new TaskViewModel
-            {
-                Id = task.id,
-                Name = task.name,
-                Description = task.description,
-                Status = task.status,
-                StartDate = task.startDate,
-                EndDate = task.endDate,
-                StatusAll = statuses,
-                UsersToTask = taskRepository.GetUsersAssignedToTask(id)
-            });
+            return View(model);
         }
 
         [HttpPost]
@@ -57,12 +51,7 @@ namespace ProjectManagement.WebUI.Controllers
 
             if (ModelState.IsValid && task != null)
             {
-                task.name = model.Name;
-                task.description = model.Description;
-                task.status = model.Status;
-                task.fkPriority = model.Priority;
-                task.startDate = model.StartDate;
-                task.endDate = model.EndDate;
+                Mapper.Map<TaskViewModel, Task>(model, task);
 
                 taskRepository.UpdateTask(task);
             }

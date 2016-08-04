@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using ProjectManagement.Domain.Abstract;
+using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Models;
 
 namespace ProjectManagement.WebUI.Controllers
@@ -12,36 +14,19 @@ namespace ProjectManagement.WebUI.Controllers
     public class HomeController : Controller
     {
         private IProjectRepository repository;
-        private IUserRepository userRepository;
 
-        public HomeController(IProjectRepository data, IUserRepository userRepo)
+        public HomeController(IProjectRepository data)
         {
             repository = data;
-
-            userRepository = userRepo;
         }
 
         public ViewResult ViewProjects()
         {
+            var projects = repository.GetLastNProjects(5);
 
-            /*return View((from a in repository.GetLastNProjects(5)
-                         join b in userRepository.Users on a.fkInitiator equals b.id
-                select new ProjectsViewModel
-                {
-                    id = a.id,
-                    name = a.name,
-                    createDate = a.createDate,
-                    Initiator = b.name
-                }
-                ));*/
+            var model = Mapper.Map<List<Project>, List<ProjectsViewModel>>(projects);
 
-            return View(repository.GetLastNProjects(5).Select(p => new ProjectsViewModel
-            {
-                id = p.id,
-                Initiator = p.User.name,
-                name = p.name,
-                createDate = p.createDate
-            }));
+            return View(model);
         }
     }
 }

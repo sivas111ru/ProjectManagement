@@ -39,6 +39,8 @@ namespace ProjectManagement.WebUI
                 cfg.CreateMap<Project, ProjectsViewModel>()
                     .ForMember(x => x.Initiator, x => x.MapFrom(m => m.User.name));
 
+                cfg.CreateMap<ProjectCreateViewModel, Project>();
+
                 cfg.CreateMap<Task, TaskViewModel>()
                     .ForMember(x => x.Priority, x => x.MapFrom(m => m.fkPriority)); ;
                 cfg.CreateMap<TaskViewModel, Task>()

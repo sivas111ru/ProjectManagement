@@ -1,0 +1,12 @@
+﻿@using ProjectManagement.WebUI.Helpers
+
+@helper ClassedDropDownList (string index, IEnumerable<ClassedSelectListItem> list ) {
+    <select class="form-control">
+        @foreach (var item in list)
+        {
+            item.Selected = item.Value.Equals(index);
+
+            <option class="@(item.CssClass)" value="@(item.Value)" selected="@(item.Selected)">@(item.Text)</option>
+        }
+    </select>
+}

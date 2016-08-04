@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Domain.Entities;
+using ProjectManagement.WebUI.Helpers;
 
 namespace ProjectManagement.WebUI.Models
 {
@@ -20,6 +21,6 @@ namespace ProjectManagement.WebUI.Models
         public DateTime? EndDate { get; set; }
 
         public List<SelectListItem> StatusAll { get; set; }
-        public List<SelectListItem> PriorityAll { get; set; }
+        public List<ClassedSelectListItem> PriorityAll { get; set; }
     }
 }

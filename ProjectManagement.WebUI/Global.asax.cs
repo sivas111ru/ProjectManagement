@@ -9,6 +9,7 @@ using AutoMapper;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Infrastructure;
 using ProjectManagement.WebUI.Models;
+using ProjectManagement.WebUI.Helpers;
 
 namespace ProjectManagement.WebUI
 {
@@ -47,9 +48,10 @@ namespace ProjectManagement.WebUI
                     .ForMember(x => x.Text, x => x.MapFrom(m => m.name))
                     .ForMember(x => x.Value, x => x.MapFrom(m => m.id));
 
-                cfg.CreateMap<TasksPriority, SelectListItem>()
+                cfg.CreateMap<TasksPriority, ClassedSelectListItem>()
+                    .ForMember(x => x.Value, x => x.MapFrom(m => m.id))
                     .ForMember(x => x.Text, x => x.MapFrom(m => m.name))
-                    .ForMember(x => x.Value, x => x.MapFrom(m => m.id));
+                    .ForMember(x => x.CssClass, x => x.MapFrom(m => "priority-" + m.name.ToLower()));
             });
         }
     }

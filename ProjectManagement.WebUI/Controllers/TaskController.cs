@@ -7,6 +7,7 @@ using AutoMapper;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Concrete;
 using ProjectManagement.Domain.Entities;
+using ProjectManagement.WebUI.Helpers;
 using ProjectManagement.WebUI.Models;
 
 
@@ -33,7 +34,7 @@ namespace ProjectManagement.WebUI.Controllers
             var model = Mapper.Map<TaskViewModel>(task);
             model.UsersToTask = taskRepository.GetUsersAssignedToTask(id);
             model.StatusAll = Mapper.Map<List<TasksStatus>, List<SelectListItem>>(taskRepository.GetAllTasksStatuses());
-            model.PriorityAll = Mapper.Map<List<TasksPriority>, List<SelectListItem>>(taskRepository.GetAllTaskPriorities());
+            model.PriorityAll = Mapper.Map<List<TasksPriority>, List<ClassedSelectListItem>>(taskRepository.GetAllTaskPriorities());
 
             return View(model);
         }

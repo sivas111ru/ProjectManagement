@@ -32,9 +32,11 @@ namespace ProjectManagement.WebUI
             {
                 cfg.CreateMap<User, UserPageViewModel>()
                     .ForMember(x => x.IsNotification, x => x.MapFrom(m => m.notification));
-
                 cfg.CreateMap<UserPageViewModel, User>()
                     .ForMember(x => x.notification, x => x.MapFrom(m => m.IsNotification));
+
+                cfg.CreateMap<Project, ProjectsViewModel>()
+                    .ForMember(x => x.Initiator, x => x.MapFrom(m => m.User.name));
             });
         }
     }

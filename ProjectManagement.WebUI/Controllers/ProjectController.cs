@@ -40,8 +40,9 @@ namespace ProjectManagement.WebUI.Controllers
 
             return View(new ProjectPageViewModel()
             {
-                UsersInvolved = usersInvolved,
+                Name = project.name,
                 Description = project.description,
+                UsersInvolved = usersInvolved,
                 TasksInvolved = tasksInvolved.Select(x => Tuple.Create(x.Task, x.User)).ToList()
             }
                 );

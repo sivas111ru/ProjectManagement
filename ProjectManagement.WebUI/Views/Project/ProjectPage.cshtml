@@ -17,55 +17,45 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.Description, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
             </div>
         </div>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h2>Пользователи</h2>
+
         <div class="form-group">
             <ul>
                 @foreach (var user in Model.UsersInvolved)
                 {
                     <li>
-                        @Html.ActionLink(user.Name, "UserPage", new { controller="Account", id = user.Id })
+                        @Html.ActionLink(user.Name, "UserPage", new {controller = "Account", id = user.Id})
                     </li>
                 }
             </ul>
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.Label("Task")
-                        </th>
-                        <th>
-                            @Html.Label("User")
-                        </th>
-                    </tr>
-                    @foreach (var task in Model.TasksInvolved)
-                    {
-                        <tr>
-                                @Html.ActionLink(task.Item1.name, "EditTask", "Task", new { id = task.Item1.id }, null)
-                            <td>
-                            </td>
-                                @Html.ActionLink(task.Item2.name, "UserPage", "Account", new { id = task.Item2.id }, null)
-                            <td>
-                            </td>
-                        </tr>
-                    }
-                </table>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        <h2>Задания</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Task")
+                </th>
+                <th>
+                    @Html.Label("User")
+                </th>
+            </tr>
+            @foreach (var task in Model.TasksInvolved)
+                {
+                <tr>
+                    <td>@Html.ActionLink(task.Item1.name, "EditTask", "Task", new { id = task.Item1.id }, null)</td>
+                    <td>@Html.ActionLink(task.Item2.name, "UserPage", "Account", new { id = task.Item2.id }, null)</td>
+                </tr>
+            }
+        </table>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 

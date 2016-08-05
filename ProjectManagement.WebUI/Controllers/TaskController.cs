@@ -31,7 +31,7 @@ namespace ProjectManagement.WebUI.Controllers
             if (task == null)
                 return RedirectToAction("ViewProjects", "Home");
 
-            var model = Mapper.Map<TaskViewModel>(task);
+            var model = Mapper.Map<TaskEditViewModel>(task);
             model.UsersToTask = taskRepository.GetUsersAssignedToTask(id);
             model.StatusAll = Mapper.Map<List<TasksStatus>, List<SelectListItem>>(taskRepository.GetAllTasksStatuses());
             model.PriorityAll = Mapper.Map<List<TasksPriority>, List<ClassedSelectListItem>>(taskRepository.GetAllTaskPriorities());
@@ -40,18 +40,33 @@ namespace ProjectManagement.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditTask(TaskViewModel model)
+        public ActionResult EditTask(TaskEditViewModel model)
         {
             Task task = taskRepository.GetTaskById(model.Id);
 
             if (ModelState.IsValid && task != null)
             {
-                Mapper.Map<TaskViewModel, Task>(model, task);
+                Mapper.Map<TaskEditViewModel, Task>(model, task);
 
                 taskRepository.UpdateTask(task);
             }
 
             return RedirectToAction("EditTask");
+        }
+
+        public ViewResult ViewTask(int id)
+        {
+            return View(new TaskViewModel
+            {
+                Name = taskRepository.GetTaskById(id).name,
+                Description = taskRepository.GetTaskById(id).description,
+                UserViewModel = (taskRepository.UsersTasksMaps.Where(a => a.active).Select(a => new UserPageViewModel()
+                {
+                    Id = a.User.id,
+                    Name = a.User.name,
+                    Email = a.User.email
+                })).FirstOrDefault()
+            });
         }
     }
 }

@@ -51,7 +51,7 @@
             @foreach (var task in Model.TasksInvolved)
                 {
                 <tr>
-                    <td>@Html.ActionLink(task.Item1.name, "EditTask", "Task", new { id = task.Item1.id }, null)</td>
+                    <td>@Html.ActionLink(task.Item1.name, "ViewTask", "Task", new { id = task.Item1.id }, null)</td>
                     <td>@Html.ActionLink(task.Item2.name, "UserPage", "Account", new { id = task.Item2.id }, null)</td>
                 </tr>
             }

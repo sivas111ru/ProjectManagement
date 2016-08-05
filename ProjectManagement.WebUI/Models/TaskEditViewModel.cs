@@ -8,7 +8,7 @@ using ProjectManagement.WebUI.Helpers;
 
 namespace ProjectManagement.WebUI.Models
 {
-    public class TaskViewModel
+    public class TaskEditViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }

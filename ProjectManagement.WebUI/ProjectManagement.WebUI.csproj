@@ -193,6 +193,7 @@
     <Compile Include="Models\ProjectPageViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel.cs" />
     <Compile Include="Models\ResetPassViewModel.cs" />
+    <Compile Include="Models\TaskEditViewModel.cs" />
     <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Models\UserPageViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -251,6 +252,7 @@
     <Content Include="Views\Project\ProjectCreate.cshtml" />
     <Content Include="Views\Project\ProjectsView.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Task\ViewTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

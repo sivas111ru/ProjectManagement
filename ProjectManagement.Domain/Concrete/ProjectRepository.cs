@@ -122,6 +122,9 @@ namespace ProjectManagement.Domain.Concrete
             }
         }
 
-
+        public List<Entities.Task> GetProjectsTasks(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

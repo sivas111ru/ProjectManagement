@@ -15,6 +15,7 @@ namespace ProjectManagement.Domain.Concrete
         public IQueryable<TasksHistory> TasksHistory => dbContext.TasksHistories.AsQueryable();
         public IQueryable<TasksHistoryType> TasksHistoryTypes => dbContext.TasksHistoryTypes.AsQueryable();
         public IQueryable<TasksStatus> TasksStatuses => dbContext.TasksStatuses.AsQueryable();
+        public IQueryable<UsersTasksMap> UsersTasksMaps => dbContext.UsersTasksMaps.AsQueryable();
         public IQueryable<TasksPriority> TaskPriorities => dbContext.TasksPriorities.AsQueryable();
 
         public Task GetTaskById(int id)

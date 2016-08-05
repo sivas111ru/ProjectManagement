@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.WebUI.Models
@@ -13,5 +14,7 @@ namespace ProjectManagement.WebUI.Models
         public string Description { get; set; }
 
         public List<User> UsersInvolved { get; set; }
+
+        public List<Tuple<Task,User>> TasksInvolved { get; set; } 
     }
 }

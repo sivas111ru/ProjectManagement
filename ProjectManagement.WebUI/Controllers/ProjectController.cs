@@ -16,11 +16,13 @@ namespace ProjectManagement.WebUI.Controllers
     {
         private IProjectRepository ProjectRepository;
         private IUserRepository UserRepository;
+        private ITaskRepository TaskRepository;
 
-        public ProjectController(IProjectRepository data, IUserRepository udata)
+        public ProjectController(IProjectRepository data, IUserRepository udata, ITaskRepository trRepository)
         {
             ProjectRepository = data;
             UserRepository = udata;
+            TaskRepository = trRepository;
         }
 
 
@@ -28,11 +30,22 @@ namespace ProjectManagement.WebUI.Controllers
         {
             var project = ProjectRepository.GetProjectById(id);
             var usersInvolved = ProjectRepository.GetAllUsersByProjectId(id);
+            var tasksInvolved = (from a in TaskRepository.UsersTasksMaps
+                                 where a.active && a.Task.fkProject == id
+                                 select new
+                                 {
+                                     a.Task,
+                                     a.User
+                                 }).ToList();
 
-            return View(new ProjectPageViewModel() {
+
+            return View(new ProjectPageViewModel()
+            {
                 UsersInvolved = usersInvolved,
-                Description = project.description}
-            );
+                Description = project.description,
+                TasksInvolved = tasksInvolved.Select(x => Tuple.Create(x.Task, x.User)).ToList()
+            }
+                );
         }
 
         public ViewResult ProjectUsersEdit(int id)

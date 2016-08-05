@@ -12,6 +12,7 @@ namespace ProjectManagement.Domain.Abstract
         IQueryable<TasksHistory> TasksHistory { get; }
         IQueryable<TasksHistoryType> TasksHistoryTypes { get; }
         IQueryable<TasksStatus> TasksStatuses { get; }
+        IQueryable<UsersTasksMap> UsersTasksMaps { get; }
 
         // Task
         Task GetTaskById(int id);

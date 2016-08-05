@@ -26,24 +26,14 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.UsersInvolved, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.Label("Name")
-                        </th>
-                    </tr>
-                    @foreach (var user in Model.UsersInvolved)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(un => user.name)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
+            <ul>
+                @foreach (var user in Model.UsersInvolved)
+                {
+                    <li>
+                        @Html.ActionLink(user.Name, "UserPage", new { controller="Account", id = user.Id })
+                    </li>
+                }
+            </ul>
         </div>
 
         <div class="form-group">

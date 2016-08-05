@@ -27,12 +27,12 @@ namespace ProjectManagement.WebUI.Controllers
         public ViewResult ProjectPage(int id)
         {
             var project = ProjectRepository.GetProjectById(id);
-            var usersInvolved = ProjectRepository.GetAllUsersByProjectId(id);
+            var usersInvolved = Mapper.Map<List<User>, List<UserViewModel>>(ProjectRepository.GetAllUsersByProjectId(id));
 
             return View(new ProjectPageViewModel() {
                 UsersInvolved = usersInvolved,
-                Description = project.description}
-            );
+                Description = project.description
+            });
         }
 
         public ViewResult ProjectUsersEdit(int id)

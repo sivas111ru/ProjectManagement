@@ -253,6 +253,7 @@
     <Content Include="Views\Project\ProjectsView.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Task\ViewTask.cshtml" />
+    <Content Include="Views\Shared\Partials\_TaskTableView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

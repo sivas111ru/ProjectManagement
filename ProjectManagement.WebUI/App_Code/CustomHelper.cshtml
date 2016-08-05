@@ -1,5 +1,10 @@
 ﻿@using System.Web.Mvc
 @using ProjectManagement.WebUI.Helpers
+@using ProjectManagement.WebUI.Models
+@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+@using System.Web.Mvc.Routing;
+@using System.Web.Mvc.Razor;
 
 @helper ClassedDropDownList (string name, string index, IEnumerable<ClassedSelectListItem> list ) {
     <select class="form-control colored-dropdown" name="@(name)" id="@(name)">
@@ -11,3 +16,13 @@
         }
     </select>
 }
+
+@*@helper RenderUsersList ( List<UserViewModel> users )
+{
+    <ul>
+        @foreach (var user in users)
+        {
+            $1$<li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id })</li>#1#
+        }
+    </ul>
+}*@

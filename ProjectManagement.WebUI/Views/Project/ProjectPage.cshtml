@@ -1,4 +1,5 @@
-﻿@model ProjectManagement.WebUI.Models.ProjectPageViewModel
+﻿@using ProjectManagement.WebUI.Models
+@model ProjectManagement.WebUI.Models.ProjectPageViewModel
 
 @{
     ViewBag.Title = "ProjectPage";
@@ -31,26 +32,7 @@
 
 <h3>Задания</h3>
 
-<table class="table">
-    <tr>
-        <th>Задание</th>
-        <th>Ответственный</th>
-        <th>Статус</th>
-    </tr>
-    @foreach (var task in Model.Tasks)
-    {
-        <tr class="@(task.PriorityCssClass)">
-            <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = task.Id }, null)</td>
-            <td>
-                <ul class="list-commasepareted">
-                    @foreach (var user in task.Users)
-                    {
-                        <li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id }, null)</li>
-                    }
-                </ul>
-            </td>
-            <td>@(task.Status)</td>
-        </tr>
-    }
-</table>
-
+@if (Model.Tasks != null)
+{
+    @Html.Partial("~/Views/Shared/Partials/_TaskTableView.cshtml", Model.Tasks)
+}

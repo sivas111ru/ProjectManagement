@@ -160,9 +160,7 @@ namespace ProjectManagement.Domain.Concrete
         public List<User> GetUsersAssignedToTask(int taskId)
         {
             return
-                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId)
-                    .Join(dbContext.Users, map => map.fkUser, u => u.id, (map, u) => u)
-                    .ToList();
+                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId).Select(u=>u.User).ToList();
         }
     }
 }

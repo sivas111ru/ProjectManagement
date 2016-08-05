@@ -54,19 +54,17 @@ namespace ProjectManagement.WebUI.Controllers
             return RedirectToAction("EditTask");
         }
 
-        public ViewResult ViewTask(int id)
+        public ActionResult ViewTask(int id)
         {
-            return View(new TaskViewModel
-            {
-                Name = taskRepository.GetTaskById(id).name,
-                Description = taskRepository.GetTaskById(id).description,
-                UserViewModel = (taskRepository.UsersTasksMaps.Where(a => a.active).Select(a => new UserPageViewModel()
-                {
-                    Id = a.User.id,
-                    Name = a.User.name,
-                    Email = a.User.email
-                })).FirstOrDefault()
-            });
+            var task = taskRepository.GetTaskById(id);
+
+            if (task == null)
+                return RedirectToAction("ViewProjects", "Home");
+
+            var model = Mapper.Map<TaskViewModel>(task);
+            model.Users = Mapper.Map<List<User>, List<UserViewModel>>(taskRepository.GetUsersAssignedToTask(id));
+            
+            return View(model);
         }
     }
 }

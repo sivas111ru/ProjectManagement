@@ -5,39 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewTask</h2>
+<h2>Задача: @(Model.Name)</h2>
 
-<div>
-    <h4>TaskViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<h3>Описание</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+@Html.DisplayFor(m => m.Description)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+<h3>Пользователи на задаче</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+<ul class="list-commasepareted">
+    @foreach (var user in Model.Users)
+    {
+        <li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id }, null)</li>
+    }
+</ul>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserViewModel.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserViewModel.Name)
-            @Html.DisplayFor(model => model.UserViewModel.Email)
-        </dd>
-
-    </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")

@@ -122,6 +122,9 @@ namespace ProjectManagement.Domain.Concrete
             }
         }
 
-
+        public List<Entities.Task> GetProjectsTasks(int id)
+        {
+            return dbContext.Tasks.Where(x => x.fkProject.Equals(id)).ToList();
+        }
     }
 }

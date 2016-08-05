@@ -15,7 +15,10 @@ namespace ProjectManagement.WebUI.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public List<Tuple<Task,User>> TasksInvolved { get; set; } 
+        public List<Tuple<Task,User>> TasksInvolved { get; set; }
         public List<UserViewModel> UsersInvolved { get; set; }
+
+
+        public List<TaskViewModel> Tasks { get; set; }
     }
 }

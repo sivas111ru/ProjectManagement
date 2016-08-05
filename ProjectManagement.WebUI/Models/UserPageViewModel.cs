@@ -16,5 +16,7 @@ namespace ProjectManagement.WebUI.Models
         public bool IsNotification { get; set; }
 
         public bool IsPageOwner { get; set; }
+
+        public List<TaskViewModel> Tasks { get; set; }
     }
 }

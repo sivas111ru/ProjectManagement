@@ -20,6 +20,8 @@ namespace ProjectManagement.Domain.Abstract
 
         Project GetProjectById(int projectId);
 
+        List<Task> GetProjectsTasks(int id);
+
         bool EditProject(Project project);
 
         bool DeleteProject(int projectId);

@@ -10,6 +10,8 @@ namespace ProjectManagement.WebUI.Models
 {
     public class ProjectPageViewModel
     {
+        public string Name { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

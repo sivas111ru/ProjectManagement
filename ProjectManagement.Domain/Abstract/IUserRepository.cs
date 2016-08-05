@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Domain.Abstract
@@ -17,5 +16,8 @@ namespace ProjectManagement.Domain.Abstract
         bool DeleteUserById(int id);
         bool AddUser(User user);
         bool UpdateUser(User user);
+
+        List<Task> GetuserTasks(int id);
+
     }
 }

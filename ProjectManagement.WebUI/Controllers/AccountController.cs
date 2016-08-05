@@ -70,6 +70,7 @@ namespace ProjectManagement.WebUI.Controllers
                 return View();
 
             UserPageViewModel model = Mapper.Map<UserPageViewModel>(user);
+            model.Tasks = Mapper.Map<List<Task>, List<TaskViewModel>>(userRepository.GetuserTasks(user.id));
 
             return View(model);
         }

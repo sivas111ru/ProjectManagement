@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Entities;
 
@@ -58,6 +57,11 @@ namespace ProjectManagement.Domain.Concrete
             dbContext.SaveChanges();
 
             return true;
+        }
+
+        public List<Task> GetuserTasks(int id)
+        {
+            return dbContext.UsersTasksMaps.Where(x => x.active && x.fkUser == id).Select(x => x.Task).ToList();
         }
     }
 }

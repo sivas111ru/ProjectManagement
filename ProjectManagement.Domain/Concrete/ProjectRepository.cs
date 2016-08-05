@@ -124,7 +124,7 @@ namespace ProjectManagement.Domain.Concrete
 
         public List<Entities.Task> GetProjectsTasks(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Tasks.Where(x => x.fkProject.Equals(id)).ToList();
         }
     }
 }

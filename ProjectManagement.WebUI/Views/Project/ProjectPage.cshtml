@@ -59,7 +59,7 @@
     @foreach (var task in Model.Tasks)
     {
         <tr class="@(task.PriorityCssClass)">
-            <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = 1 }, null)</td>
+            <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = task.Id }, null)</td>
             <td>
                 <ul class="list-commasepareted">
                     @foreach (var user in task.Users)

@@ -31,25 +31,6 @@
 
 <h3>Задания</h3>
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Task")
-        </th>
-        <th>
-            @Html.Label("User")
-        </th>
-    </tr>
-    @foreach (var task in Model.TasksInvolved)
-    {
-        <tr>
-            <td>@Html.ActionLink(task.Item1.name, "ViewTask", "Task", new {id = task.Item1.id}, null)</td>
-            <td>@Html.ActionLink(task.Item2.name, "UserPage", "Account", new {id = task.Item2.id}, null)</td>
-        </tr>
-    }
-</table>*@
-
-
 <table class="table">
     <tr>
         <th>Задание</th>

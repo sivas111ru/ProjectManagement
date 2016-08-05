@@ -51,11 +51,20 @@ namespace ProjectManagement.WebUI.Controllers
             return View();
         }
 
-        public ViewResult UserPage()
+        public ViewResult UserPage(int? id)
         {
-            var userEmail = User.Identity.Name;
+            User user;
 
-            User user = userRepository.GetUserByEmail(userEmail);
+            if (id.HasValue)
+            {
+                int userId = id.Value;
+                user = userRepository.GetUserById(userId);
+            }
+            else
+            {
+                var userEmail = User.Identity.Name;
+                user = userRepository.GetUserByEmail(userEmail);
+            }
 
             if (user == null)
                 return View();
@@ -65,8 +74,22 @@ namespace ProjectManagement.WebUI.Controllers
             return View(model);
         }
 
+
+        public ActionResult Edit()
+        {
+            var userEmail = User.Identity.Name;
+            User user = userRepository.GetUserByEmail(userEmail);
+
+            if ( user == null )
+                return RedirectToAction("ViewProjects", "Home");
+
+            UserPageViewModel model = Mapper.Map<UserPageViewModel>(user);
+
+            return View(model);
+        }
+
         [HttpPost]
-        public ActionResult UserPage(UserPageViewModel user)
+        public ActionResult Edit(UserPageViewModel user)
         {
             var u = userRepository.GetUserById(user.Id);
 

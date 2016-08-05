@@ -29,7 +29,7 @@ namespace ProjectManagement.WebUI.Controllers
         public ViewResult ProjectPage(int id)
         {
             var project = ProjectRepository.GetProjectById(id);
-            var usersInvolved = ProjectRepository.GetAllUsersByProjectId(id);
+            var usersInvolved = Mapper.Map<List<User>, List<UserViewModel>>(ProjectRepository.GetAllUsersByProjectId(id));
             var tasksInvolved = (from a in TaskRepository.UsersTasksMaps
                                  where a.active && a.Task.fkProject == id
                                  select new
@@ -39,8 +39,8 @@ namespace ProjectManagement.WebUI.Controllers
                                  }).ToList();
 
 
-            return View(new ProjectPageViewModel()
             {
+            return View(new ProjectPageViewModel()
                 UsersInvolved = usersInvolved,
                 Description = project.description,
                 TasksInvolved = tasksInvolved.Select(x => Tuple.Create(x.Task, x.User)).ToList()

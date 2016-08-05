@@ -31,6 +31,9 @@ namespace ProjectManagement.WebUI
         {
             Mapper.Initialize(cfg =>
             {
+
+                cfg.CreateMap<User, UserViewModel>();
+
                 cfg.CreateMap<User, UserPageViewModel>()
                     .ForMember(x => x.IsNotification, x => x.MapFrom(m => m.notification));
                 cfg.CreateMap<UserPageViewModel, User>()

@@ -38,12 +38,21 @@ namespace ProjectManagement.WebUI.Controllers
                                      a.User
                                  }).ToList();
 
+            List<TaskViewModel> tasks = Mapper.Map<List<Task>, List<TaskViewModel>>(ProjectRepository.GetProjectsTasks(id));
+
+            foreach (var task in tasks)
+            {
+                task.Users = Mapper.Map<List<User>, List<UserViewModel>>(TaskRepository.GetUsersAssignedToTask(task.Id));
+            }
+
             return View(new ProjectPageViewModel()
             {
                 Name = project.name,
                 Description = project.description,
                 UsersInvolved = usersInvolved,
-                TasksInvolved = tasksInvolved.Select(x => Tuple.Create(x.Task, x.User)).ToList()
+                //TasksInvolved = tasksInvolved.Select(x => Tuple.Create(x.Task, x.User)).ToList()
+                TasksInvolved = null,
+                Tasks = tasks
             }
                 );
         }

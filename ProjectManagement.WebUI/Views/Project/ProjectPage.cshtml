@@ -31,23 +31,45 @@
 
 <h3>Задания</h3>
 
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.Label("Task")
-                </th>
-                <th>
-                    @Html.Label("User")
-                </th>
-            </tr>
-            @foreach (var task in Model.TasksInvolved)
-                {
-                <tr>
-                    <td>@Html.ActionLink(task.Item1.name, "ViewTask", "Task", new { id = task.Item1.id }, null)</td>
-                    <td>@Html.ActionLink(task.Item2.name, "UserPage", "Account", new { id = task.Item2.id }, null)</td>
-                </tr>
-            }
-        </table>
-    </div>
-}
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Task")
+        </th>
+        <th>
+            @Html.Label("User")
+        </th>
+    </tr>
+    @foreach (var task in Model.TasksInvolved)
+    {
+        <tr>
+            <td>@Html.ActionLink(task.Item1.name, "ViewTask", "Task", new {id = task.Item1.id}, null)</td>
+            <td>@Html.ActionLink(task.Item2.name, "UserPage", "Account", new {id = task.Item2.id}, null)</td>
+        </tr>
+    }
+</table>*@
+
+
+<table class="table">
+    <tr>
+        <th>Задание</th>
+        <th>Ответственный</th>
+        <th>Статус</th>
+    </tr>
+    @foreach (var task in Model.Tasks)
+    {
+        <tr class="@(task.PriorityCssClass)">
+            <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = 1 }, null)</td>
+            <td>
+                <ul class="list-commasepareted">
+                    @foreach (var user in task.Users)
+                    {
+                        <li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id }, null)</li>
+                    }
+                </ul>
+            </td>
+            <td>@(task.Status)</td>
+        </tr>
+    }
+</table>
 

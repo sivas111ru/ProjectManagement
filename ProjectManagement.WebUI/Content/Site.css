@@ -30,6 +30,17 @@
     color: red;
 }
 
+.list-commasepareted > li {
+    display: inline;
+}
+
+.list-commasepareted > li:after {
+    content: ",";
+}
+.list-commasepareted > li:last-child:after {
+    content: "";
+}
+
 /* PRIORITIES */
 
 .priority-low { background: #F2FAFF;}

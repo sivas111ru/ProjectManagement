@@ -51,7 +51,7 @@ namespace ProjectManagement.WebUI
 
                 cfg.CreateMap<Task, TaskViewModel>()
                     .ForMember(x => x.PriorityCssClass,
-                        x => x.MapFrom(m => m.TasksPriority.name.ToLower() + "-priority"))
+                        x => x.MapFrom(m => "priority-" +m.TasksPriority.name.ToLower()))
                     .ForMember(x => x.Status, x => x.MapFrom(m => m.TasksStatus.name));
 
                 cfg.CreateMap<TasksStatus, SelectListItem>()

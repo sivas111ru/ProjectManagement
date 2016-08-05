@@ -70,7 +70,6 @@ namespace ProjectManagement.WebUI.Controllers
                 return View();
 
             UserPageViewModel model = Mapper.Map<UserPageViewModel>(user);
-            model.IsPageOwner = id == 0;
 
             return View(model);
         }
@@ -85,7 +84,6 @@ namespace ProjectManagement.WebUI.Controllers
                 return RedirectToAction("ViewProjects", "Home");
 
             UserPageViewModel model = Mapper.Map<UserPageViewModel>(user);
-            model.IsPageOwner = true;
 
             return View(model);
         }

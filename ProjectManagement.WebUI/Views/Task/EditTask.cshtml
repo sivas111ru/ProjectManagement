@@ -56,20 +56,14 @@
         </div>
     </div>
 
-    <div class="row" ng-app="UserSearch" ng-controller="userSearchCtrl">
-        <div>
-            
-        </div>
+    <div class="row" ng-app="UserSearch" ng-controller="userSearchCtrl" ng-init="init(@(Model.Id))">
 
         <div class="row">
             <div class="col-md-4">
                 <h3>Пользователи</h3>
 
                 <ul>
-                    @foreach (var user in Model.UsersToTask)
-                    {
-                        <li>@(user.name)</li>
-                    }
+                    <li ng-repeat="user in users">{{user.Name}}</li>
                 </ul>
             </div>
             <div class="col-md-4">

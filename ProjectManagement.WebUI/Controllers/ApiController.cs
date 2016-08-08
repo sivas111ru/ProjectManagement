@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using AutoMapper;
+using Ninject;
+using ProjectManagement.Domain.Abstract;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.WebUI.Models;
 
@@ -22,10 +24,24 @@ namespace ProjectManagement.WebUI.Controllers
 
         };
 
+        ITaskRepository taskRepository;
+
+        public ApiController(ITaskRepository taskRepo)
+        {
+            taskRepository = taskRepo;
+        }
+
         public JsonResult SearchUsers(string id)
         {
             List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(testUsers.Where(x => x.name.Contains(id)).ToList());
             
+            return Json(u);
+        }
+
+        public JsonResult GetUsersOnTask(int id)
+        {
+            List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(taskRepository.GetUsersAssignedToTask(id));
+
             return Json(u);
         }
     }

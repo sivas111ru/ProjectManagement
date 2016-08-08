@@ -1,6 +1,6 @@
 ﻿var userSearchCtrl = function ($scope, SearchUsersService) {
 
-    $scope.users = [];
+    $scope.foundUsers = [];
     $scope.usersToAdd = [];
     $scope.usersToRemove = [];
 
@@ -9,14 +9,14 @@
 
         if (search_str.length > 2) {
             SearchUsersService.search(search_str).success(function (data) {
-                $scope.users = data;
+                $scope.foundUsers = data;
                 console.log(data[0]);
             });
         }
     }
 
     $scope.userItemClick = function(itemIndex) {
-        $scope.usersToAdd.push($scope.users[itemIndex]);
+        $scope.usersToAdd.push($scope.foundUsers[itemIndex]);
     }
 }
 

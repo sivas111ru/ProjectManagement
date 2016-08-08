@@ -27,7 +27,19 @@ namespace ProjectManagement.WebUI.Infrastructure.Concrete
             if (!user.password.Equals(password))
                 return false;
 
-            FormsAuthentication.SetAuthCookie(email, false);
+            string roles = user.role;
+
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                1,
+                user.email,
+                DateTime.Now,
+                DateTime.Now.AddMinutes(20),
+                false,
+                roles);
+
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket));
+
+            HttpContext.Current.Response.Cookies.Add(cookie);
 
             return true;
         }

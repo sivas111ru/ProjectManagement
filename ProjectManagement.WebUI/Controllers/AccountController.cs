@@ -26,6 +26,7 @@ namespace ProjectManagement.WebUI.Controllers
             resetPass = passR;
             repository = data;
             userRepository = userRepo;
+            
         }
         public ViewResult Login()
         {

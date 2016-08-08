@@ -30,16 +30,8 @@
 
 <h3>Мои задания:</h3>
 
-<table class="table">
-    <tr>
-        <th>Задание</th>
-        <th>Статус</th>
-    </tr>
-    @foreach (var task in Model.Tasks)
-    {
-        <tr class="@(task.PriorityCssClass)">
-            <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = task.Id }, null)</td>
-            <td>@(task.Status)</td>
-        </tr>
-    }
-</table>
+
+@if (Model.Tasks != null)
+{
+    Html.RenderPartial("~/Views/Shared/Partials/_TaskTableView.cshtml", Model.Tasks);
+}

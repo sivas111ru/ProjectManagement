@@ -1,9 +1,16 @@
 ﻿@model IEnumerable<ProjectManagement.WebUI.Models.TaskViewModel>
 
+@{
+    var areUsersDisplayed = !Model.All(x => x.Users == null || x.Users.Count == 0);
+}
+
 <table class="table">
     <tr>
         <th>Задание</th>
-        <th>Ответственный</th>
+        @if (areUsersDisplayed)
+        {
+            <th>Ответственный</th>
+        }
         <th>Статус</th>
     </tr>
 
@@ -11,14 +18,22 @@
     {
         <tr class="@(task.PriorityCssClass)">
             <td>@Html.ActionLink(task.Name, "ViewTask", "Task", new { id = task.Id }, null)</td>
-            <td>
-                <ul class="list-commasepareted">
-                    @foreach (var user in task.Users)
-                    {
-                        <li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id }, null)</li>
-                    }
-                </ul>
-            </td>
+
+            @if (areUsersDisplayed)
+            {
+                <td>
+                    <ul class="list-commasepareted">
+                        @if (task.Users != null)
+                        {
+                            foreach (var user in task.Users)
+                            {
+                                <li>@Html.ActionLink(user.Name, "UserPage", "Account", new { id = user.Id }, null)</li>
+                            }
+                        }
+                    </ul>
+                </td>
+            }
+
             <td>@(task.Status)</td>
         </tr>
     }

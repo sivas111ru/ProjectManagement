@@ -1,6 +1,8 @@
 ﻿var userSearchCtrl = function ($scope, SearchUsersService) {
 
     $scope.users = [];
+    $scope.usersToAdd = [];
+    $scope.usersToRemove = [];
 
     $scope.inputSearchFieldListener = function () {
         var search_str = $scope.searchInput;
@@ -11,6 +13,10 @@
                 console.log(data[0]);
             });
         }
+    }
+
+    $scope.userItemClick = function(itemIndex) {
+        $scope.usersToAdd.push($scope.users[itemIndex]);
     }
 }
 

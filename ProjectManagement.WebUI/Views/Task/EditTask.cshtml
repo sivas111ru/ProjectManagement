@@ -56,13 +56,43 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="form-group col-md-4" ng-app="UserSearch" ng-controller="userSearchCtrl">
-            <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()"/>
+    <div class="row" ng-app="UserSearch" ng-controller="userSearchCtrl">
+        <div>
+            <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()" />
+        </div>
 
-            <ul>
-                <li ng-repeat="user in users">{{user.Name}}</li>
-            </ul>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Пользователи</h4>
+
+                <ul>
+                    @foreach (var user in Model.UsersToTask)
+                    {
+                        <li>@(user.name)</li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Найденные пользователи</h4>
+
+                <ul>
+                    <li ng-repeat="user in users" ng-click="userItemClick($index)">{{user.Name}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Пользователи будут добавлены</h4>
+
+                <ul>
+                    <li ng-repeat="user in usersToAdd">{{user.Name}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Пользователи будут удалены</h4>
+
+                <ul>
+                    <li ng-repeat="user in usersToRemove">{{user.Name}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 

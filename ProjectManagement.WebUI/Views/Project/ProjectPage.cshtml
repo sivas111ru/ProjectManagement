@@ -34,5 +34,7 @@
 
 @if (Model.Tasks != null)
 {
-    @Html.Partial("~/Views/Shared/Partials/_TaskTableView.cshtml", Model.Tasks)
+    @*@Html.Partial("~/Views/Shared/Partials/_TaskTableView.cshtml", Model.Tasks)*@
+
+    Html.RenderPartial("~/Views/Shared/Partials/_TaskTableView.cshtml", Model.Tasks);
 }

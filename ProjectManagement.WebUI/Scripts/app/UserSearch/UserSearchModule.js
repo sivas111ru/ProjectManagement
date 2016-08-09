@@ -50,12 +50,21 @@
 
     $scope.removeUser = function (user_id) {
         var users = $scope.users;
+        var usersToAdd = $scope.usersToAdd;
 
         var i = users.length;
         while (i--) {
             if (users[i].Id === user_id) {
+                var user = users[i];
+
                 users.splice(i, 1);
-                $scope.usersToRemove.push(users[i]);
+
+                var index = usersToAdd.indexOf(user);
+                if (index >= 0) {
+                    usersToAdd.splice(index, 1);
+                } else {
+                    $scope.usersToRemove.push(user);
+                }
                 break;
             }
         }

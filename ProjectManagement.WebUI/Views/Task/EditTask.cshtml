@@ -77,6 +77,7 @@
                     </tr>
                 </table>
             </div>
+
             <div class="col-md-4">
                 <h3>Добавить пользователя</h3>
 
@@ -90,6 +91,16 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="">
+            <p>users will be added</p>
+
+            <input type="text" name="UsersToAdd" ng-repeat="user in usersToAdd" value="{{user.Id}}"/>
+
+            <p>users will be removed</p>
+
+            <input type="text" name="UsersToRemove" ng-repeat="user in usersToRemove" value="{{user.Id}}"/>
         </div>
     </div>
 

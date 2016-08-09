@@ -26,10 +26,19 @@
     $scope.userItemClick = function (itemIndex) {
         var user = $scope.foundUsers[itemIndex];
 
+        $scope.searchInput = "";
+
+        var users = $scope.users;
+        var i = users.length;
+        
+        while (i--) {
+            if (users[i].Id === user.Id) {
+                return;
+            }
+        }
+
         $scope.usersToAdd.push(user);
         $scope.users.push(user);
-
-        $scope.searchInput = "";
     }
 
     $scope.looseFocus = function () {

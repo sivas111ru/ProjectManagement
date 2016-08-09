@@ -16,15 +16,15 @@ namespace ProjectManagement.WebUI.Controllers
     {
         List<User> testUsers = new List<User>
         {
-            new User {name = "Test", email = "email", id = 1},
-            new User {name = "Перескоков Владислав Сергеевич", email = "email", id = 1},
-            new User {name = "Неперескоков Владислав Сергеевич", email = "email", id = 1},
-            new User {name = "Фурс Владимир Владимирович", email = "email", id = 1},
-            new User {name = "Сидоренко Василий Сергеевич", email = "email", id = 1},
-            new User {name = "Нефурс Владимир Владимирович", email = "email", id = 1},
-            new User {name = "Торбек Владимир Юрьевич", email = "email", id = 1},
-            new User {name = "Неторбек Владимир Юрьевич", email = "email", id = 1},
-            new User {name = "Второйнеторбек Владимир Юрьевич", email = "email", id = 1},
+            new User {name = "Test", email = "email", id = 10},
+            new User {name = "Перескоков Владислав Сергеевич", email = "email", id = 11},
+            new User {name = "Неперескоков Владислав Сергеевич", email = "email", id = 12},
+            new User {name = "Фурс Владимир Владимирович", email = "email", id = 13},
+            new User {name = "Сидоренко Василий Сергеевич", email = "email", id = 14},
+            new User {name = "Нефурс Владимир Владимирович", email = "email", id = 15},
+            new User {name = "Торбек Владимир Юрьевич", email = "email", id = 16},
+            new User {name = "Неторбек Владимир Юрьевич", email = "email", id = 17},
+            new User {name = "Второйнеторбек Владимир Юрьевич", email = "email", id = 18},
         };
 
         ITaskRepository taskRepository;

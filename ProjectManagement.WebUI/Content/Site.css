@@ -48,17 +48,27 @@
     padding: 0;
     border: 1px solid #CCCCCC;
     background: white;
+    z-index: 100;
    /* width: 300px;*/
 }
 
 .popup-suggestion-box > li {
-    display: block;
+    display: inline-block;
     border-bottom: 1px solid #CCCCCC;
     height: 40px;
+    width: 100%;
     padding-left: 15px;
     padding-right: 15px;
     line-height: 40px;
     vertical-align: middle;
+    cursor: pointer;
+}
+
+.popup-suggestion-box > li:hover {
+    background-color: #eee;
+}
+.popup-suggestion-box > li:active {
+    background-color: #aaa;
 }
 
 .popup-suggestion-box > li:last-child {

@@ -47,6 +47,19 @@
             usersFound.pop();
         }
     }
+
+    $scope.removeUser = function (user_id) {
+        var users = $scope.users;
+
+        var i = users.length;
+        while (i--) {
+            if (users[i].Id === user_id) {
+                users.splice(i, 1);
+                $scope.usersToRemove.push(users[i]);
+                break;
+            }
+        }
+    }
 }
 
 var UsersService = function ($http) {

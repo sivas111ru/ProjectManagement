@@ -62,9 +62,20 @@
             <div class="col-md-4">
                 <h3>Пользователи</h3>
 
-                <ul>
-                    <li ng-repeat="user in users">{{user.Name}}</li>
-                </ul>
+                <table class="table table-striped">
+                    <tr>
+                        <th>№</th>
+                        <th>Пользователь</th>
+                        <th>Удалить?</th>
+                    </tr>
+                    <tr ng-repeat="user in users">
+                        <td>{{$index + 1}}</td>
+                        <td width="100%">{{user.Name}}</td>
+                        <td class="text-center">
+                            <span class="btn btn-sm glyphicon glyphicon-remove text-danger" ng-click="removeUser(user.Id)"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-4">
                 <h3>Добавить пользователя</h3>

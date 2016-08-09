@@ -17,11 +17,14 @@ namespace ProjectManagement.WebUI.Controllers
         List<User> testUsers = new List<User>
         {
             new User {name = "Test", email = "email", id = 1},
-            new User {name = "Vlad", email = "email", id = 1},
-            new User {name = "Vladislav", email = "email", id = 1},
-            new User {name = "Vladimir", email = "email", id = 1},
-            new User {name = "Vladimir2", email = "email", id = 1},
-
+            new User {name = "Перескоков Владислав Сергеевич", email = "email", id = 1},
+            new User {name = "Неперескоков Владислав Сергеевич", email = "email", id = 1},
+            new User {name = "Фурс Владимир Владимирович", email = "email", id = 1},
+            new User {name = "Сидоренко Василий Сергеевич", email = "email", id = 1},
+            new User {name = "Нефурс Владимир Владимирович", email = "email", id = 1},
+            new User {name = "Торбек Владимир Юрьевич", email = "email", id = 1},
+            new User {name = "Неторбек Владимир Юрьевич", email = "email", id = 1},
+            new User {name = "Второйнеторбек Владимир Юрьевич", email = "email", id = 1},
         };
 
         ITaskRepository taskRepository;
@@ -33,7 +36,9 @@ namespace ProjectManagement.WebUI.Controllers
 
         public JsonResult SearchUsers(string id)
         {
-            List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(testUsers.Where(x => x.name.Contains(id)).ToList());
+            String searchStr = id.ToLower();
+
+            List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(testUsers.Where(x => x.name.ToLower().Contains(searchStr)).Take(5).ToList());
             
             return Json(u);
         }

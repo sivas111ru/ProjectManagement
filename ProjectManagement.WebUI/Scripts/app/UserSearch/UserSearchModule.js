@@ -18,7 +18,7 @@
         if (search_str.length > 2) {
             UsersService.search(search_str).success(function (data) {
                 $scope.foundUsers = data;
-                console.log(data[0]);
+                console.log(data);
             });
         }
     }
@@ -43,6 +43,11 @@ var UsersService = function ($http) {
 }
 
 angular
-    .module("UserSearch", [])
+    .module("UserSearch", ["ngSanitize"])
     .factory("UsersService", ["$http", UsersService])
+    .filter('searchfilter', function() {
+        return function(input, query) {
+            return input.replace(RegExp('(' + query + ')', 'gi'), '<span class="regexp-found">$1</span>');
+        }
+    })
     .controller("userSearchCtrl", ["$scope", "UsersService", userSearchCtrl]);

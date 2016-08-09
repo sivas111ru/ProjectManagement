@@ -70,12 +70,12 @@
                 <h3>Добавить пользователя</h3>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()" />
-                </div>
+                    <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()"/>
 
-                <ul>
-                    <li ng-repeat="user in foundUsers" ng-click="userItemClick($index)">{{user.Name}}</li>
-                </ul>
+                    <ul class="popup-suggestion-box">
+                        <li ng-repeat="user in foundUsers" ng-click="userItemClick($index)" ng-bind-html="user.Name | searchfilter:searchInput"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -91,5 +91,6 @@
 
 @section scripts {
     @Scripts.Render("~/Scripts/angular.min.js")
+    @Scripts.Render("~/Scripts/angular-sanitize.min.js")
     @Scripts.Render("~/Scripts/app/UserSearch/UserSearchModule.js")
 }

@@ -41,6 +41,34 @@
     content: "";
 }
 
+.popup-suggestion-box {
+    display: block;
+    margin: 0 20px 0 0;
+    position: absolute;
+    padding: 0;
+    border: 1px solid #CCCCCC;
+    background: white;
+   /* width: 300px;*/
+}
+
+.popup-suggestion-box > li {
+    display: block;
+    border-bottom: 1px solid #CCCCCC;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.popup-suggestion-box > li:last-child {
+    border-bottom: none;
+}
+
+.regexp-found {
+    font-weight: bold;
+}
+
 /* PRIORITIES */
 
 .priority-low { background: #F2FAFF;}

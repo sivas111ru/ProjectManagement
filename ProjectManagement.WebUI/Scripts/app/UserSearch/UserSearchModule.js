@@ -28,6 +28,15 @@
 
         $scope.usersToAdd.push(user);
         $scope.users.push(user);
+
+        $scope.searchInput = "";
+    }
+
+    $scope.looseFocus = function () {
+        var usersFound = $scope.foundUsers;
+        while (usersFound.length) {
+            usersFound.pop();
+        }
     }
 }
 

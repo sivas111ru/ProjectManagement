@@ -70,10 +70,10 @@
                 <h3>Добавить пользователя</h3>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()"/>
+                    <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()" ng-blur="looseFocus()"/>
 
                     <ul class="popup-suggestion-box" ng-show="foundUsers.length > 0">
-                        <li ng-repeat="user in foundUsers" ng-click="userItemClick($index)">
+                        <li ng-repeat="user in foundUsers" ng-mousedown="userItemClick($index)">
                             <span ng-bind-html="user.Name | searchfilter:searchInput"></span>
                         </li>
                     </ul>

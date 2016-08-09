@@ -96,11 +96,11 @@
         <div class="">
             <p>users will be added</p>
 
-            <input type="text" name="UsersToAdd" ng-repeat="user in usersToAdd" value="{{user.Id}}"/>
+            <input type="text" name="@Html.NameFor(m=>m.UsersToAdd)" ng-repeat="user in usersToAdd" value="{{user.Id}}"/>
 
             <p>users will be removed</p>
 
-            <input type="text" name="UsersToRemove" ng-repeat="user in usersToRemove" value="{{user.Id}}"/>
+            <input type="text" name="@Html.NameFor(m=>m.UsersToRemove)" ng-repeat="user in usersToRemove" value="{{user.Id}}"/>
         </div>
     </div>
 

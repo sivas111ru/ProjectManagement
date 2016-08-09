@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()"/>
 
-                    <ul class="popup-suggestion-box">
+                    <ul class="popup-suggestion-box" ng-show="foundUsers.length > 0">
                         <li ng-repeat="user in foundUsers" ng-click="userItemClick($index)" ng-bind-html="user.Name | searchfilter:searchInput"></li>
                     </ul>
                 </div>

@@ -41,6 +41,7 @@ namespace ProjectManagement.Domain.Abstract
         List<Task> GetAllTaskByUserId(int id);
         List<int> GetUsersIdbyTaskId(int id);
         List<User> GetUsersAssignedToTask(int taskId);
-
+        void addUsersToTask(int taskId, List<int> usersToAdd);
+        void removeUsersFromTask(int taskId, List<int> usersToRemove);
     }
 }

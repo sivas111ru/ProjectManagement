@@ -162,5 +162,36 @@ namespace ProjectManagement.Domain.Concrete
             return
                 dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId).Select(u=>u.User).ToList();
         }
+
+        public void addUsersToTask(int taskId, List<int> usersToAdd)
+        {
+            List<User> users = dbContext.Users.Where(x => usersToAdd.Contains(x.id)).ToList();
+
+            foreach (var user in users)
+            {
+                dbContext.UsersTasksMaps.Add(new UsersTasksMap
+                {
+                    active = true,
+                    fkTask = taskId,
+                    fkUser = user.id
+                });
+            }
+
+            dbContext.SaveChanges();
+        }
+
+        public void removeUsersFromTask(int taskId, List<int> usersToRemove)
+        {
+            IEnumerable<UsersTasksMap> users = dbContext.UsersTasksMaps.Where(x => usersToRemove.Contains(x.id));
+
+            foreach (var u in users)
+            {
+                u.active = false;
+
+                dbContext.UsersTasksMaps.AddOrUpdate(u);
+            }
+
+            dbContext.SaveChanges();
+        }
     }
 }

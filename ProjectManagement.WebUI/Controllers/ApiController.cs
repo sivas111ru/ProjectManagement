@@ -27,18 +27,20 @@ namespace ProjectManagement.WebUI.Controllers
             new User {name = "Второйнеторбек Владимир Юрьевич", email = "email", id = 18},
         };
 
+        IUserRepository userRepository;
         ITaskRepository taskRepository;
 
-        public ApiController(ITaskRepository taskRepo)
+        public ApiController(ITaskRepository taskRepo, IUserRepository userRepo)
         {
             taskRepository = taskRepo;
+            userRepository = userRepo;
         }
 
         public JsonResult SearchUsers(string id)
         {
             String searchStr = id.ToLower();
 
-            List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(testUsers.Where(x => x.name.ToLower().Contains(searchStr)).Take(5).ToList());
+            List<UserViewModel> u = Mapper.Map<List<User>, List<UserViewModel>>(userRepository.SearchUserByName(searchStr, 5));
             
             return Json(u);
         }

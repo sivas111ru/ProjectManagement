@@ -18,6 +18,7 @@ namespace ProjectManagement.Domain.Abstract
         bool UpdateUser(User user);
 
         List<Task> GetuserTasks(int id);
+        List<User> SearchUserByName(string searchStr, int resultCount);
 
     }
 }

@@ -160,7 +160,7 @@ namespace ProjectManagement.Domain.Concrete
         public List<User> GetUsersAssignedToTask(int taskId)
         {
             return
-                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId).Select(u=>u.User).ToList();
+                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId && m.active).Select(u=>u.User).ToList();
         }
 
         public void addUsersToTask(int taskId, List<int> usersToAdd)
@@ -182,7 +182,7 @@ namespace ProjectManagement.Domain.Concrete
 
         public void removeUsersFromTask(int taskId, List<int> usersToRemove)
         {
-            IEnumerable<UsersTasksMap> users = dbContext.UsersTasksMaps.Where(x => usersToRemove.Contains(x.id));
+            List<UsersTasksMap> users = dbContext.UsersTasksMaps.Where(x => x.fkTask.Equals(taskId) && x.active && usersToRemove.Contains(x.fkUser)).ToList();
 
             foreach (var u in users)
             {

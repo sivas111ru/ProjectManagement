@@ -49,6 +49,16 @@ namespace ProjectManagement.WebUI.Controllers
                 Mapper.Map<TaskEditViewModel, Task>(model, task);
 
                 taskRepository.UpdateTask(task);
+
+                if (model.UsersToAdd != null && model.UsersToAdd.Count >= 0)
+                {
+                    taskRepository.addUsersToTask(model.Id, model.UsersToAdd);
+                }
+
+                if (model.UsersToRemove != null && model.UsersToRemove.Count >= 0)
+                {
+                    taskRepository.removeUsersFromTask(model.Id, model.UsersToRemove);
+                }
             }
 
             return RedirectToAction("EditTask");

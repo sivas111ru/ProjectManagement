@@ -1,4 +1,4 @@
-﻿@model ProjectManagement.WebUI.Models.TaskViewModel
+﻿@model ProjectManagement.WebUI.Models.TaskEditViewModel
 
 @using ProjectManagement.WebUI.Helpers
 
@@ -44,15 +44,63 @@
 
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new {@class = "control-label"})
+            @Html.EditorFor(model => model.StartDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.StartDate, "", new {@class = "text-danger"})
         </div>
 
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new {@class = "control-label"})
+            @Html.EditorFor(model => model.EndDate, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.EndDate, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="row" ng-app="UserSearch" ng-controller="userSearchCtrl" ng-init="init(@(Model.Id))">
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Пользователи</h3>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>№</th>
+                        <th>Пользователь</th>
+                        <th>Удалить?</th>
+                    </tr>
+                    <tr ng-repeat="user in users">
+                        <td>{{$index + 1}}</td>
+                        <td width="100%">{{user.Name}}</td>
+                        <td class="text-center">
+                            <span class="btn btn-sm glyphicon glyphicon-remove text-danger" ng-click="removeUser(user.Id)"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Добавить пользователя</h3>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="searchInput" ng-change="inputSearchFieldListener()" ng-blur="looseFocus()"/>
+
+                    <ul class="popup-suggestion-box" ng-show="foundUsers.length > 0">
+                        <li ng-repeat="user in foundUsers" ng-mousedown="userItemClick($index)">
+                            <span ng-bind-html="user.Name | searchfilter:searchInput"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+            <p>users will be added</p>
+
+            <input type="text" name="@Html.NameFor(m=>m.UsersToAdd)" ng-repeat="user in usersToAdd" value="{{user.Id}}"/>
+
+            <p>users will be removed</p>
+
+            <input type="text" name="@Html.NameFor(m=>m.UsersToRemove)" ng-repeat="user in usersToRemove" value="{{user.Id}}"/>
         </div>
     </div>
 
@@ -66,6 +114,7 @@
 }
 
 @section scripts {
-    
-    <script src="~/Scripts/Task/EditTask.js"></script>
+    @Scripts.Render("~/Scripts/angular.min.js")
+    @Scripts.Render("~/Scripts/angular-sanitize.min.js")
+    @Scripts.Render("~/Scripts/app/UserSearch/UserSearchModule.js")
 }

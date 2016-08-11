@@ -160,7 +160,38 @@ namespace ProjectManagement.Domain.Concrete
         public List<User> GetUsersAssignedToTask(int taskId)
         {
             return
-                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId).Select(u=>u.User).ToList();
+                dbContext.UsersTasksMaps.Where(m => m.fkTask == taskId && m.active).Select(u=>u.User).ToList();
+        }
+
+        public void addUsersToTask(int taskId, List<int> usersToAdd)
+        {
+            List<User> users = dbContext.Users.Where(x => usersToAdd.Contains(x.id)).ToList();
+
+            foreach (var user in users)
+            {
+                dbContext.UsersTasksMaps.Add(new UsersTasksMap
+                {
+                    active = true,
+                    fkTask = taskId,
+                    fkUser = user.id
+                });
+            }
+
+            dbContext.SaveChanges();
+        }
+
+        public void removeUsersFromTask(int taskId, List<int> usersToRemove)
+        {
+            List<UsersTasksMap> users = dbContext.UsersTasksMaps.Where(x => x.fkTask.Equals(taskId) && x.active && usersToRemove.Contains(x.fkUser)).ToList();
+
+            foreach (var u in users)
+            {
+                u.active = false;
+
+                dbContext.UsersTasksMaps.AddOrUpdate(u);
+            }
+
+            dbContext.SaveChanges();
         }
     }
 }

@@ -63,5 +63,10 @@ namespace ProjectManagement.Domain.Concrete
         {
             return dbContext.UsersTasksMaps.Where(x => x.active && x.fkUser == id).Select(x => x.Task).ToList();
         }
+
+        public List<User> SearchUserByName(string searchStr, int resultCount)
+        {
+            return dbContext.Users.Where(u => u.name.Contains(searchStr)).Take(resultCount).ToList();
+        }
     }
 }

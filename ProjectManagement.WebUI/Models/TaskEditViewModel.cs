@@ -22,5 +22,8 @@ namespace ProjectManagement.WebUI.Models
 
         public List<SelectListItem> StatusAll { get; set; }
         public List<ClassedSelectListItem> PriorityAll { get; set; }
+
+        public List<int> UsersToAdd { get; set; }
+        public List<int> UsersToRemove { get; set; }
     }
 }

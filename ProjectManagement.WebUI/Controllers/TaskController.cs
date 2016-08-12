@@ -32,7 +32,7 @@ namespace ProjectManagement.WebUI.Controllers
                 return RedirectToAction("ViewProjects", "Home");
 
             var model = Mapper.Map<TaskEditViewModel>(task);
-            model.UsersToTask = taskRepository.GetUsersAssignedToTask(id);
+            model.UsersToTask = taskRepository.GetUsersAssignedToTask(id); // DELETE ME
             model.StatusAll = Mapper.Map<List<TasksStatus>, List<SelectListItem>>(taskRepository.GetAllTasksStatuses());
             model.PriorityAll = Mapper.Map<List<TasksPriority>, List<ClassedSelectListItem>>(taskRepository.GetAllTaskPriorities());
 
